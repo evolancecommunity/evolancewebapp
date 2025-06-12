@@ -192,10 +192,9 @@ class TimeSoulAPITester:
         success, _ = self.run_test(
             "Complete Story",
             "POST",
-            f"stories/{self.story_id}/complete",
+            f"stories/{self.story_id}/complete?acceptance_level=85",
             200,
-            data={},
-            params={"acceptance_level": 85}
+            data={}
         )
         return success
 
