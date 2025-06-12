@@ -138,31 +138,45 @@ const ChatInterface = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-700 to-indigo-800 relative overflow-hidden">
-      {/* Spiritual Background */}
-      <div 
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1560146560-1fce47962590')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(3px)'
-        }}
-      ></div>
+      {/* Moving Galaxy Background */}
+      <div className="absolute inset-0 moving-galaxy-bg">
+        {/* Primary Galaxy Layer */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="galaxy-spiral galaxy-spiral-1"></div>
+          <div className="galaxy-spiral galaxy-spiral-2"></div>
+          <div className="galaxy-spiral galaxy-spiral-3"></div>
+        </div>
+        
+        {/* Floating Stars */}
+        <div className="absolute inset-0 overflow-hidden">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full opacity-60 animate-twinkle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
+            ></div>
+          ))}
+        </div>
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-purple-300 rounded-full opacity-30 animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
-            }}
-          ></div>
-        ))}
+        {/* Flowing Energy Streams */}
+        <div className="absolute inset-0">
+          <div className="energy-stream energy-stream-1"></div>
+          <div className="energy-stream energy-stream-2"></div>
+          <div className="energy-stream energy-stream-3"></div>
+        </div>
+
+        {/* Cosmic Dust Clouds */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="cosmic-dust cosmic-dust-1"></div>
+          <div className="cosmic-dust cosmic-dust-2"></div>
+          <div className="cosmic-dust cosmic-dust-3"></div>
+          <div className="cosmic-dust cosmic-dust-4"></div>
+        </div>
       </div>
 
       {/* Header */}
