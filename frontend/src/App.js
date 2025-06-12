@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import Profile from "./components/Profile";
 import ChatInterface from "./components/ChatInterface";
 import VideoLessons from "./components/VideoLessons";
+import ConsciousnessTimeline from "./components/ConsciousnessTimeline";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
@@ -134,6 +135,7 @@ function App() {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/chat" element={<ChatInterface />} />
                 <Route path="/videos" element={<VideoLessons />} />
+                <Route path="/consciousness" element={<ConsciousnessTimeline />} />
                 <Route path="*" element={<Navigate to="/dashboard" replace />} />
               </>
             )}
