@@ -217,13 +217,13 @@ class TimeSoulAPITester:
 
     def test_send_chat_message(self):
         """Test sending a chat message"""
+        message = "Hello, I'm feeling anxious today."
         success, response = self.run_test(
             "Send Chat Message",
             "POST",
-            "chat/message",
+            f"chat/message?message={message}",
             200,
-            data={},
-            params={"message": "Hello, I'm feeling anxious today."}
+            data={}
         )
         if success:
             print(f"💬 AI Response: {response['message']}")
