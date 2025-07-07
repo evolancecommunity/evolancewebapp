@@ -16,6 +16,9 @@ from passlib.context import CryptContext
 import openai
 from openai import OpenAI
 
+# Import hybrid AI integration
+from ai_core.hybrid_ai_integration import evolance_ai
+
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
@@ -184,6 +187,45 @@ class SelfState(BaseModel):
     key_characteristics: List[str]
     dominant_emotions: List[str]
     life_priorities: List[str]
+
+# NEW: AI Integration Models
+class AvatarState(BaseModel):
+    primary_color: str
+    secondary_color: str
+    active_chakra: str
+    glow_intensity: int
+    animation_state: str
+    emotional_state: str
+    fulfillment_level: int
+
+class EmotionalProfile(BaseModel):
+    emotional_fingerprint: Dict[str, int]
+    fulfillment_trend: str
+    total_interactions: int
+    recent_emotions: List[str]
+    dominant_emotion: str
+    emotional_balance_score: int
+    growth_milestones: List[Dict[str, Any]]
+
+class CheckInMessage(BaseModel):
+    message: str
+    tone: str
+    timestamp: str
+    type: str
+
+class MemoryReminder(BaseModel):
+    type: str
+    title: str
+    message: str
+    timestamp: str
+    memory_date: str
+    emotion: str
+
+class CrisisResources(BaseModel):
+    crisis_lifeline: Dict[str, str]
+    crisis_text_line: Dict[str, str]
+    emergency: Dict[str, str]
+    disclaimer: str
 
 class DecisionOption(BaseModel):
     title: str
@@ -762,11 +804,31 @@ async def send_chat_message(
     # Get user context for AI
     user_context = {
         "name": current_user.full_name,
-        "spiritual_level": current_user.spiritual_level
+        "spiritual_level": current_user.spiritual_level,
+        "story_context": story_context
     }
     
-    # Generate AI response
-    ai_response_text = await get_ai_response(message, user_context, story_context)
+    # Use hybrid AI system for enhanced response
+    try:
+        ai_result = await evolance_ai.process_chat_message(
+            user_id=current_user.id,
+            message=message,
+            context=user_context
+        )
+        ai_response_text = ai_result.get("response", "I'm here to help you.")
+        
+        # Check for crisis indicators
+        if ai_result.get("crisis_detected", False):
+            logger.warning(f"Crisis indicators detected for user {current_user.id}")
+            # Add crisis resources to response
+            crisis_resources = ai_result.get("crisis_resources", {})
+            if crisis_resources:
+                ai_response_text += f"\n\n{crisis_resources.get('disclaimer', '')}"
+        
+    except Exception as e:
+        logger.error(f"Hybrid AI error, falling back to original: {e}")
+        # Fallback to original AI response
+        ai_response_text = await get_ai_response(message, user_context, story_context)
     
     ai_message = ChatMessage(
         user_id=current_user.id,
@@ -1064,6 +1126,75 @@ async def get_fulfillment_analytics(current_user: User = Depends(get_current_use
 async def root():
     return {"message": "TimeSoul API is running", "status": "healthy"}
 
+# NEW: Hybrid AI Integration Routes
+@api_router.post("/ai/chat", response_model=Dict[str, Any])
+async def hybrid_ai_chat(
+    message: str,
+    context: Optional[Dict[str, Any]] = None,
+    current_user: User = Depends(get_current_user)
+):
+    """Enhanced chat endpoint using hybrid AI system"""
+    try:
+        result = await evolance_ai.process_chat_message(
+            user_id=current_user.id,
+            message=message,
+            context=context
+        )
+        return result
+    except Exception as e:
+        logger.error(f"Error in hybrid AI chat: {e}")
+        raise HTTPException(status_code=500, detail="AI processing error")
+
+@api_router.get("/ai/profile", response_model=EmotionalProfile)
+async def get_emotional_profile(current_user: User = Depends(get_current_user)):
+    """Get user's emotional profile and graphs"""
+    try:
+        profile = await evolance_ai.get_emotional_profile(current_user.id)
+        return EmotionalProfile(**profile)
+    except Exception as e:
+        logger.error(f"Error getting emotional profile: {e}")
+        raise HTTPException(status_code=500, detail="Profile generation error")
+
+@api_router.get("/ai/avatar", response_model=AvatarState)
+async def get_avatar_state(current_user: User = Depends(get_current_user)):
+    """Get avatar visualization state"""
+    try:
+        avatar_state = await evolance_ai.get_avatar_state(current_user.id)
+        return AvatarState(**avatar_state)
+    except Exception as e:
+        logger.error(f"Error getting avatar state: {e}")
+        raise HTTPException(status_code=500, detail="Avatar generation error")
+
+@api_router.get("/ai/checkin", response_model=CheckInMessage)
+async def get_ai_checkin(current_user: User = Depends(get_current_user)):
+    """Get AI friend check-in message"""
+    try:
+        checkin = await evolance_ai.generate_checkin_message(current_user.id)
+        return CheckInMessage(**checkin)
+    except Exception as e:
+        logger.error(f"Error generating checkin: {e}")
+        raise HTTPException(status_code=500, detail="Check-in generation error")
+
+@api_router.get("/ai/reminder", response_model=Optional[MemoryReminder])
+async def get_memory_reminder(current_user: User = Depends(get_current_user)):
+    """Get memory/milestone reminder"""
+    try:
+        reminder = await evolance_ai.generate_memory_reminder(current_user.id)
+        return MemoryReminder(**reminder) if reminder else None
+    except Exception as e:
+        logger.error(f"Error generating reminder: {e}")
+        return None
+
+@api_router.get("/ai/crisis/resources", response_model=CrisisResources)
+async def get_crisis_resources():
+    """Get crisis resources and helpline information"""
+    try:
+        resources = evolance_ai._get_crisis_resources()
+        return CrisisResources(**resources)
+    except Exception as e:
+        logger.error(f"Error getting crisis resources: {e}")
+        raise HTTPException(status_code=500, detail="Resource retrieval error")
+
 # Include the router in the main app
 app.include_router(api_router)
 
@@ -1096,3 +1227,7 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_db_client():
     client.close()
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from 'react';
 import { AuthContext } from '../App';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import CrisisAlert from './CrisisAlert';
 
 const ChatInterface = () => {
   const [messages, setMessages] = useState([]);
@@ -9,6 +10,7 @@ const ChatInterface = () => {
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const [recognition, setRecognition] = useState(null);
+  const [showCrisisAlert, setShowCrisisAlert] = useState(false);
   const messagesEndRef = useRef(null);
 
   const { user, API } = useContext(AuthContext);
@@ -108,6 +110,11 @@ const ChatInterface = () => {
           }
         }
       );
+
+      // Check for crisis indicators in the response
+      if (response.data.crisis_detected) {
+        setShowCrisisAlert(true);
+      }
 
       setMessages(prev => [...prev, response.data]);
     } catch (error) {
@@ -357,6 +364,12 @@ const ChatInterface = () => {
           </div>
         </div>
       </div>
+
+      {/* Crisis Alert Modal */}
+      <CrisisAlert 
+        show={showCrisisAlert} 
+        onClose={() => setShowCrisisAlert(false)} 
+      />
     </div>
   );
 };
