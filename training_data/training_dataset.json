@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "name": "Spiritual Wellness Training Data",
+    "version": "1.0",
+    "description": "Free spiritual and psychological training data",
+    "license": "public_domain",
+    "created": "2025-06-22 04:29:28"
+  },
+  "data": {
+    "sacred_texts": [
+      {
+        "id": "sacred_0",
+        "title": "Bhagavad Gita",
+        "content": "The Bhagavad Gita is a sacred Hindu scripture...",
+        "category": "hinduism",
+        "domain": "spiritual",
+        "source": "public_domain",
+        "license": "public_domain"
+      },
+      {
+        "id": "sacred_1",
+        "title": "Tao Te Ching",
+        "content": "The Tao that can be told is not the eternal Tao...",
+        "category": "taoism",
+        "domain": "spiritual",
+        "source": "public_domain",
+        "license": "public_domain"
+      },
+      {
+        "id": "sacred_2",
+        "title": "Dhammapada",
+        "content": "All that we are is the result of what we have thought...",
+        "category": "buddhism",
+        "domain": "spiritual",
+        "source": "public_domain",
+        "license": "public_domain"
+      }
+    ],
+    "psychology": [
+      {
+        "id": "psych_0",
+        "title": "Emotional Intelligence Basics",
+        "content": "Emotional intelligence involves understanding and managing emotions...",
+        "category": "emotional_intelligence",
+        "domain": "psychology",
+        "source": "public_domain",
+        "license": "public_domain"
+      },
+      {
+        "id": "psych_1",
+        "title": "Cognitive Behavioral Therapy Techniques",
+        "content": "CBT helps identify and change negative thought patterns...",
+        "category": "therapy",
+        "domain": "psychology",
+        "source": "public_domain",
+        "license": "public_domain"
+      },
+      {
+        "id": "psych_2",
+        "title": "Mindfulness Practices",
+        "content": "Mindfulness is the practice of being present in the moment...",
+        "category": "mindfulness",
+        "domain": "psychology",
+        "source": "public_domain",
+        "license": "public_domain"
+      }
+    ],
+    "meditation": [
+      {
+        "id": "meditation_0",
+        "title": "Breathing Meditation",
+        "content": "Focus on your breath. Inhale deeply, exhale slowly...",
+        "category": "meditation",
+        "domain": "spiritual_practice",
+        "source": "public_domain",
+        "license": "public_domain"
+      },
+      {
+        "id": "meditation_1",
+        "title": "Loving-Kindness Meditation",
+        "content": "Send love and compassion to yourself and others...",
+        "category": "meditation",
+        "domain": "spiritual_practice",
+        "source": "public_domain",
+        "license": "public_domain"
+      },
+      {
+        "id": "meditation_2",
+        "title": "Body Scan Meditation",
+        "content": "Scan your body from head to toe, noticing sensations...",
+        "category": "meditation",
+        "domain": "spiritual_practice",
+        "source": "public_domain",
+        "license": "public_domain"
+      }
+    ]
+  }
+}
