@@ -22,10 +22,11 @@ from ai_core.hybrid_ai_integration import evolance_ai
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
+# MongoDB connection with fallback defaults
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+db_name = os.environ.get('DB_NAME', 'evolance_db')
 client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+db = client[db_name]
 
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
@@ -316,7 +317,7 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         raise credentials_exception
     return User(**user)
 
-async def get_ai_response(message: str, user_context: dict = None, story_context: str = None) -> str:
+async def get_ai_response(message: str, user_context: dict = {}, story_context: str = "") -> str:
     """Get AI response using OpenAI GPT-4 or fallback to mock responses"""
     
     system_message = """You are Evolance, a wise and compassionate spiritual AI guide focused on inner transformation and consciousness expansion. You speak with warmth, depth, and gentle wisdom. You help users explore their inner landscape, make conscious decisions, and grow spiritually. 
@@ -404,9 +405,9 @@ Keep insights spiritual, profound but accessible, and encouraging."""
             )
             
             insights_text = response.choices[0].message.content
-            # Split into individual insights
-            insights = [insight.strip() for insight in insights_text.split('\n') if insight.strip() and not insight.strip().startswith('#')]
-            return insights[:4]  # Max 4 insights
+            if insights_text:
+                insights = [insight.strip() for insight in insights_text.split('\n') if insight.strip() and not insight.strip().startswith('#')]
+                return insights[:4]  # Max 4 insights
             
         except Exception as e:
             logger.error(f"OpenAI API error for insights: {e}")
@@ -828,7 +829,7 @@ async def send_chat_message(
     except Exception as e:
         logger.error(f"Hybrid AI error, falling back to original: {e}")
         # Fallback to original AI response
-        ai_response_text = await get_ai_response(message, user_context, story_context)
+    ai_response_text = await get_ai_response(message, user_context or {}, story_context or "")
     
     ai_message = ChatMessage(
         user_id=current_user.id,
@@ -1165,6 +1166,138 @@ async def get_avatar_state(current_user: User = Depends(get_current_user)):
         logger.error(f"Error getting avatar state: {e}")
         raise HTTPException(status_code=500, detail="Avatar generation error")
 
+@api_router.get("/ai/emotional-state")
+async def get_emotional_state(current_user: User = Depends(get_current_user)):
+    """Get current emotional state"""
+    try:
+        # Get recent chat messages to analyze emotional state
+        recent_messages = await db.chat_messages.find({
+            "user_id": current_user.id
+        }).sort("timestamp", -1).limit(10).to_list(10)
+        
+        if not recent_messages:
+            return {
+                "current_state": "neutral",
+                "confidence": 50,
+                "intensity": 50,
+                "valence": "neutral",
+                "dominant_emotion": "neutral"
+            }
+        
+        # Simple emotion analysis based on keywords
+        user_messages = [msg["message"].lower() for msg in recent_messages if msg["is_user"]]
+        if not user_messages:
+            return {
+                "current_state": "neutral",
+                "confidence": 50,
+                "intensity": 50,
+                "valence": "neutral",
+                "dominant_emotion": "neutral"
+            }
+        
+        # Basic emotion detection
+        positive_words = ["happy", "good", "great", "excited", "joy", "love", "wonderful", "amazing"]
+        negative_words = ["sad", "bad", "angry", "fear", "anxious", "worried", "upset", "depressed"]
+        neutral_words = ["okay", "fine", "normal", "alright", "neutral"]
+        
+        positive_count = sum(1 for msg in user_messages for word in positive_words if word in msg)
+        negative_count = sum(1 for msg in user_messages for word in negative_words if word in msg)
+        neutral_count = sum(1 for msg in user_messages for word in neutral_words if word in msg)
+        
+        if positive_count > negative_count and positive_count > neutral_count:
+            current_state = "positive"
+            dominant_emotion = "joy"
+            valence = "positive"
+        elif negative_count > positive_count and negative_count > neutral_count:
+            current_state = "negative"
+            dominant_emotion = "sadness"
+            valence = "negative"
+        else:
+            current_state = "neutral"
+            dominant_emotion = "neutral"
+            valence = "neutral"
+        
+        confidence = min(90, max(30, abs(positive_count - negative_count) * 20))
+        intensity = min(100, max(20, (positive_count + negative_count) * 15))
+        
+        return {
+            "current_state": current_state,
+            "confidence": confidence,
+            "intensity": intensity,
+            "valence": valence,
+            "dominant_emotion": dominant_emotion
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting emotional state: {e}")
+        return {
+            "current_state": "neutral",
+            "confidence": 50,
+            "intensity": 50,
+            "valence": "neutral",
+            "dominant_emotion": "neutral"
+        }
+
+@api_router.get("/consciousness/journey")
+async def get_consciousness_journey(current_user: User = Depends(get_current_user)):
+    """Get consciousness journey timeline"""
+    try:
+        # Get user's decisions and fulfillment entries
+        decisions = await db.consciousness_decisions.find({
+            "user_id": current_user.id
+        }).sort("created_at", -1).limit(20).to_list(20)
+        
+        fulfillment_entries = await db.fulfillment_entries.find({
+            "user_id": current_user.id
+        }).sort("timestamp", -1).limit(50).to_list(50)
+        
+        # Create timeline entries
+        timeline_entries = []
+        
+        # Add decisions
+        for decision in decisions:
+            timeline_entries.append({
+                "id": decision["id"],
+                "type": "decision",
+                "title": decision["decision_title"],
+                "description": decision["decision_description"],
+                "timestamp": decision["created_at"],
+                "status": decision["decision_status"],
+                "fulfillment_trend": decision.get("overall_fulfillment_trend", "stable")
+            })
+        
+        # Add fulfillment entries
+        for entry in fulfillment_entries:
+            timeline_entries.append({
+                "id": entry["id"],
+                "type": "fulfillment",
+                "title": f"Fulfillment Check-in",
+                "description": f"Fulfillment: {entry['fulfillment_level']}%, Happiness: {entry['happiness_level']}%",
+                "timestamp": entry["timestamp"],
+                "status": "completed",
+                "fulfillment_level": entry["fulfillment_level"],
+                "happiness_level": entry["happiness_level"],
+                "clarity_level": entry["clarity_level"],
+                "confidence_level": entry["confidence_level"]
+            })
+        
+        # Sort by timestamp
+        timeline_entries.sort(key=lambda x: x["timestamp"], reverse=True)
+        
+        return {
+            "timeline": timeline_entries,
+            "total_entries": len(timeline_entries),
+            "recent_activity": timeline_entries[:10] if timeline_entries else []
+        }
+        
+    except Exception as e:
+        logger.error(f"Error getting consciousness journey: {e}")
+        return {
+            "timeline": [],
+            "total_entries": 0,
+            "recent_activity": []
+        }
+
 @api_router.get("/ai/checkin", response_model=CheckInMessage)
 async def get_ai_checkin(current_user: User = Depends(get_current_user)):
     """Get AI friend check-in message"""
@@ -1194,6 +1327,64 @@ async def get_crisis_resources():
     except Exception as e:
         logger.error(f"Error getting crisis resources: {e}")
         raise HTTPException(status_code=500, detail="Resource retrieval error")
+
+@api_router.post("/ai/visualize-decision")
+async def visualize_decision(decision: dict, current_user: User = Depends(get_current_user)):
+    """Predict emotional states for past, present, and future based on a decision description."""
+    text = decision.get('decision', '')
+    # Mock logic: Use keywords to generate emotions
+    import random
+    def analyze(text, t):
+        if not text.strip():
+            return {"emotion": "neutral", "description": f"No decision provided for {t}."}
+        if any(w in text.lower() for w in ["risk", "change", "unknown"]):
+            return {"emotion": "anxious", "description": f"You may feel anxious {t}."}
+        if any(w in text.lower() for w in ["excited", "opportunity", "growth"]):
+            return {"emotion": "excited", "description": f"You may feel excited {t}."}
+        if any(w in text.lower() for w in ["loss", "regret", "sad"]):
+            return {"emotion": "sad", "description": f"You may feel sad {t}."}
+        # Random fallback
+        return {"emotion": random.choice(["hopeful", "uncertain", "confident", "neutral"]), "description": f"Mixed emotions {t}."}
+    return {
+        "past": analyze(text, "in the past"),
+        "present": analyze(text, "right now"),
+        "future": analyze(text, "in the future")
+    }
+
+class EmotionTimePoint(BaseModel):
+    timestamp: str  # ISO format
+    value: float
+
+class EmotionTimeSeriesResponse(BaseModel):
+    emotions: Dict[str, List[EmotionTimePoint]]
+
+@api_router.get("/ai/emotional-state/timeseries", response_model=EmotionTimeSeriesResponse)
+async def get_emotional_state_timeseries(current_user: User = Depends(get_current_user)):
+    """Get time-series data for each emotion (mock data for Emolytics charts)"""
+    import datetime
+    import random
+    base_time = datetime.datetime.utcnow()
+    emotions = ["joy", "sadness", "anger", "fear", "surprise", "disgust", "trust", "anticipation"]
+    data = {}
+    for emotion in emotions:
+        series = []
+        for i in range(14):  # 14 days
+            point = EmotionTimePoint(
+                timestamp=(base_time - datetime.timedelta(days=13-i)).isoformat(),
+                value=max(0, min(100, random.gauss(50, 20)))
+            )
+            series.append(point)
+        data[emotion] = series
+    return EmotionTimeSeriesResponse(emotions=data)
+
+@api_router.post("/test/complete-personality")
+async def complete_personality_test_for_testing(current_user: User = Depends(get_current_user)):
+    """Mark user as having completed personality test for testing purposes"""
+    await db.users.update_one(
+        {"id": current_user.id},
+        {"$set": {"personality_test_completed": True, "spiritual_level": 75}}
+    )
+    return {"message": "Personality test marked as completed"}
 
 # Include the router in the main app
 app.include_router(api_router)
