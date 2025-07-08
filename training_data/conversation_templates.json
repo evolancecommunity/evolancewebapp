@@ -52,5 +52,87 @@
       "thought_reframing",
       "compassion"
     ]
+  },
+   // Psychology Terminology and Concepts
+   {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Please define concept formation and its importance in productive thinking?"
+      },
+      {
+        "role": "assistant",
+        "content": "Concept formation is the mental process of organizing information into categories or concepts. It is crucial for productive thinking as it allows individuals to simplify complex information, recognize patterns, and make informed decisions. By forming concepts, we can enhance our understanding of the world and improve our problem-solving abilities."
+      }
+    ],
+    "domain": "productive thinking",
+    "techniques": [
+      "categorisation",
+      "prototyping",
+      "schema_development"
+    ]
+  },
+   {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What is problem-solving and finding effective solutions to problems?"
+      },
+      {
+        "role": "assistant",
+        "content": "Problem-solving is the process of identifying a challenge and finding effective solutions to address it. This involves understanding the problem, generating potential solutions, and evaluating their effectiveness."
+      }
+    ],
+    "domain": "productive thinking",
+    "techniques": [
+      "algorithms",
+      "heuristics",
+      "trial_and_error"
+    ]
+  },
+
+   {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What is reasoning and list the different types of reasoning associated with it?"
+      },
+      {
+        "role": "assistant",
+        "content": "Reasoning refers to the thinking for the purpose of making judgments, decisions, or solving problems. There are several types of reasoning, including deductive reasoning, inductive reasoning, and abductive reasoning. Deductive reasoning involves drawing specific conclusions from general principles, while inductive reasoning involves forming generalizations based on specific observations. Abductive reasoning is about finding the best explanation for a set of observations."
+      }
+    ],
+    "domain": "productive thinking",
+    "techniques": [
+      "syllogistic_reasoning",
+      "everyday_reasoning",
+      "deductive_reasoning",
+      "inductive_reasoning",
+      "abductive_reasoning",
+      "confirmation_bias",
+      "oversight_bias",
+      "hindsight_effect"
+    ]
+  },
+   {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Define decision making and how heuristics can affect it?"
+      },
+      {
+        "role": "assistant",
+        "content": "Decision making is the process of making choices by identifying a decision, gathering information, and assessing alternative resolutions. Heuristics are mental shortcuts that ease the cognitive load of making decisions. influences decision making by allowing individuals to make quick judgments based on limited information, but they can also lead to distortion in memory."
+      }
+    ],
+    "domain": "productive thinking",
+    "techniques": [
+      "heuristics",
+      "Representativeness",
+      "Anchority_&_adjustment",
+      "Decision_frames",
+      "Escalation_of_commitment"
+    ]
   }
+
 ]
