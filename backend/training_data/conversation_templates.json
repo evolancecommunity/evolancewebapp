@@ -280,7 +280,7 @@
     ],
     "domain": "motivation",
     "techniques": [
-      "constructive",
+      "constructive_feedback",
       "positive_motivation"
     ]
   },
@@ -331,11 +331,28 @@
         "content": "A value implies that people believe in a behaviour and prefer it to other behaviours to act accordingly"
       }
     ],
-    "domain": "motivation",
+    "domain": "values",
     "techniques": [
-      "engagement",
-      "positive_psychology",
-      "learned_resourcefullness"
+      "rokeach",
+      "kluckhorn",
+      "meaning_and_centrality_of_values"
     ]
   },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Please explain the definition for interpersonal attraction?"
+      },
+      {
+        "role": "assistant",
+        "content": "Interpersonal attraction refers to people's attitudes & feelings about other people or groups. Two principles of interpersonal attraction are perception and the need to feel in control."
+      }
+    ],
+    "domain": "prosocial_behaviours",
+    "techniques": [
+      "social_learning",
+      "stimulation"
+    ]
+  }
 ]

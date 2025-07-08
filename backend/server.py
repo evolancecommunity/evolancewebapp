@@ -24,6 +24,7 @@ mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
+
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 ALGORITHM = "HS256"
@@ -510,6 +511,125 @@ async def initialize_personality_questions():
             }
         ]
         await db.personality_questions.insert_many(questions)
+
+# Psychology Multiple Choice Questions
+async def psychology_multiple_choice_questions():
+    psychology_questions = await db.multiple_choice_questions.count_documents({})
+    if psychology_questions == 0:
+        questions = [
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Which scientific framework asserts that each person has an own understanding of what reality is about and meaning of things?",
+                "options": [
+                    "Structuralism",
+                    "Rationalism",
+                    "Idealism",
+                    "Relativism"
+                ],
+                "category": "introduction to psychology"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "____ opposed the idea of universal truths and suggests that psychology should focus on the experiences of people in their social and cultural contexts?",
+                "options": [
+                    "Humanism",
+                    "Postmodernism",
+                    "Psychodynamics",
+                    "Positive_psychology"
+                ],
+                "category": "introduction_to_psychology"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "____ is the mostly used in the psychological approach with the aim of bringing unconscious context to the conscience",
+                "options": [
+                    "Taylorism",
+                    "Introspection",
+                    "Free association",
+                    "Eidetic reduction"
+                ],
+                "category": "introduction_to_psychology"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Which part of the brain is important for an individual following a career as a mathematician?",
+                "options": [
+                    "Thalamus",
+                    "Cerebellum",
+                    "Left hemisphere",
+                    "Right hemisphere"
+                ],
+                "category": "biological_features"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "One of the following ergonomics recommendations contribute to the proper design of work stations?",
+                "options": [
+                    "Seats with no arm rests",
+                    "Minimal space for bodily movement",
+                    "Inadequate access to the work station",
+                    "Grips and handles that fit in the hand of the user"
+                ],
+                "category": "industrial psychology in the workplace"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Which of the following body areas is prone to repetitive-strain injuries",
+                "options": [
+                    "Ear",
+                    "Eye",
+                    "Neck",
+                    "Ankle"
+                ],
+                "category": "industrial psychology in the workplace"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Which of the following domains in human development emphasise the roles of self-development and social influences in personality formation?",
+                "options": [
+                    "Critical periods",
+                    "Cognitive development",
+                    "Psychosocial development",
+                    "Physical/biological development"
+                ],
+                "category": "social_psychology"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "____ attachment type would be the appropriate insecure attachment behaviour to describe a person who prefers to be alone and avoid committing themselves in a relationship?",
+                "options": [
+                    "Secure",
+                    "Fixation",
+                    "Avoidant",
+                    "Ambivalent"
+                ],
+                "category": "attachment_theories"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Learning can be distinguised from performance in that____?",
+                "options": [
+                    "Learninig refers to behaviour",
+                    "Learning will always change behaviour",
+                    "One can always monitor learning directly",
+                    "Learning refers to the potential change in behaviour"
+                ],
+                "category": "cognition"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "A type of perception where the perceiver uses too many personal attributes to make attributions or to explain causes of or reasons for behaviour in individuals or groups is referred to as the ____?",
+                "options": [
+                    "actor-observer effect",
+                    "a top-down perceptual process",
+                    "fundamental attribution error",
+                    "self-serving bias"
+                ],
+                "category": "perception"
+            }
+        ]
+        await db.multiple_choice_questions.insert_many(questions)
+
 
 async def initialize_sample_stories():
     existing_stories = await db.stories.count_documents({})
