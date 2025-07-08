@@ -1,0 +1,57 @@
+{
+  "system": {
+    "name": "Evolance LLM System",
+    "version": "1.0.0",
+    "description": "Proprietary Emotional Intelligence Language Model"
+  },
+  "model": {
+    "type": "EmotionalTransformer",
+    "vocab_size": 50257,
+    "embedding_dim": 768,
+    "layers": 12,
+    "heads": 12,
+    "emotion_embedding_dim": 64,
+    "context_embedding_dim": 128,
+    "personality_embedding_dim": 96
+  },
+  "chroma_db": {
+    "path": "./private_chroma_db",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "collections": [
+      "evolance_conversations",
+      "emotional_patterns",
+      "user_contexts"
+    ]
+  },
+  "training": {
+    "batch_size": 4,
+    "learning_rate": 5e-05,
+    "epochs": 3,
+    "warmup_steps": 1000
+  },
+  "security": {
+    "encryption": true,
+    "access_control": true,
+    "local_storage": true
+  },
+  "openai_api_key": "",
+  "gemini_api_key": "",
+  "use_openai": true,
+  "use_gemini": true,
+  "fallback_to_local": true,
+  "data_collection_enabled": true,
+  "semantic_network_enabled": true,
+  "emotion_detection_enabled": true,
+  "intent_classification_enabled": true,
+  "chromadb_path": "./chroma_db",
+  "model_cache_dir": "./model_cache",
+  "max_response_length": 150,
+  "temperature": 0.7,
+  "enable_logging": true,
+  "log_level": "INFO",
+  "data_export_interval": 3600,
+  "semantic_network_update_threshold": 10,
+  "training_data_minimum_size": 100,
+  "enable_progressive_learning": true,
+  "progressive_learning_threshold": 50
+}
