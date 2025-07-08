@@ -630,6 +630,196 @@ async def psychology_multiple_choice_questions():
         ]
         await db.multiple_choice_questions.insert_many(questions)
 
+# Learning Experience Questionaire
+
+async def learning_experience_questionaire():
+    learning_experience = await db.learning_experience_questionaire.count_documents({})
+    if learning_experience == 0:
+        questions = [
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I understand the content of the prescribed book better after doing the activities in the study guide",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I shared my learning experiences with other people, and this enhanced my understanding",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I think I am more sensitive now to my own and other people's/group's behaviours and habits",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "The learning experience improved my competencies to create opportunities to use in my studies and work",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I believe that the discussion forums on the evolance portal help me understnd the portal better",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I learnt certain competencies in decision making and problem-solving",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "The learning experience taught me to think more critically and creativity",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "By experiencing the learning methods as well the methods and applications of psychology, I think i am now more sensitive to people behaviours and the influence of environments on people",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I learnt to study more effectively by using various methods of learning",
+                "options": [
+                    "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user_research"
+            },
+            
+            {
+                "id": str(uuid.uuid4()),
+                "question": "Sometimes I had to cooperate with other persons or groups in order to learn",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I think I have developed some basic research competencies such as reading, assessing and analysing information critically, and organising and presenting it logically and systematically",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "I had to take more personal responsibility for studying and learning, for instance by following my own pace and schedule and by probing in order to understand concepts and assumptions",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "The learning experience also taught me to write more economically, for instance, by summarising",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "The learning experience provided me with a bigger picture of events, for instance by helping me to understand people in more than one way, and to realise that we live together and are influenced by many factors",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user research"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "In general I am very satisfied with my learning experience at evolance",
+                "options": [
+                   "Strongly Disagree",
+                    "Disagree",
+                    "Agree",
+                    "Agree to some content",
+                    "Strongly Agree"
+                ],
+                "category": "user research"
+            }
+        ]
+        await db.multiple_choice_questions.insert_many(questions)
+
 
 async def initialize_sample_stories():
     existing_stories = await db.stories.count_documents({})
