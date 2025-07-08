@@ -133,6 +133,64 @@
       "Decision_frames",
       "Escalation_of_commitment"
     ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Define creativity with convergent and divergent thinking??"
+      },
+      {
+        "role": "assistant",
+        "content": "Creativity is the ability to generate new ideas or concepts, or to make connections between existing ideas. Convergent thinking involves applying knowledge to narrow potential solutions to a single one, while divergent thinking involves generating multiple, unique solutions to a problem. Both types of thinking are important for creativity, as they allow individuals to explore a wide range of possibilities and then focus on the most promising ones."
+      }
+    ],
+    "domain": "productive thinking",
+    "techniques": [
+      "convergent_thinking",
+      "divergent_thinking",
+      "incubation",
+      "inspiration",
+      "elaboration"
+    ]
+ },
+
+{
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What is the importance of language in Psychology?"
+      },
+      {
+        "role": "assistant",
+        "content": "Meaninig is found in a certain context of language, e.g. Context of cultural background, time of life, history or background."
+      }
+    ],
+    "domain": "productive thinking",
+    "techniques": [
+      "psycholinguistics",
+      "semantics"
+    ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Define the term memory and its types?"
+      },
+      {
+        "role": "assistant",
+        "content": "Memory is the cognitive ability to store and retrieve information. There are several types of memory, including sensory memory, short-term memory, and long-term memory. Sensory memory holds brief impressions of sensory information, short-term memory temporarily holds information for processing, and long-term memory stores information for extended periods."
+      }
+    ],
+    "domain": "Memory",
+    "techniques": [
+      "elaborate_rehearsal",
+      "mnemonics",
+      "simplifying_information",
+      "mood",
+      "humour_and_exaggeration"
+    ]
   }
 
 ]
