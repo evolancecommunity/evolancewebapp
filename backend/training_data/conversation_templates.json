@@ -248,7 +248,76 @@
       "cognitive_abilities",
       "sat"
     ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What is the definition of motivation and what are the various perspectives on motivation?"
+      },
+      {
+        "role": "assistant",
+        "content": "Motivation is the process that initiates, guides, and maintains goal-oriented behaviors. It is what causes us to act, whether it is getting a glass of water to reduce thirst or reading a book to gain knowledge. There are several perspectives on motivation, including instincts, drive reduction, arousal, incentive, cognitive, and humanistic perspectives. Each perspective offers a different understanding of what motivates individuals and how these motivations influence behavior."
+      }
+    ],
+    "domain": "motivation",
+    "techniques": [
+      "improved_productivity",
+      "emotional_arousal",
+      "behaviour_driven" 
+    ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What are the extrinsic sources of motivation that contribute to external activators?"
+      },
+      {
+        "role": "assistant",
+        "content": "Extrinsic sources of motivation are external factors that influence an individual's motivation to engage in a behavior or activity. These can include rewards, recognition, social approval, and external pressures. For example, a student may be motivated to study hard to earn good grades (a reward) or to gain approval from parents and teachers (social approval)."
+      }
+    ],
+    "domain": "motivation",
+    "techniques": [
+      "constructive",
+      "positive_motivation"
+    ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What are the intrinsic sources of motivation that contribute to internal activators?"
+      },
+      {
+        "role": "assistant",
+        "content": "Intrinsic sources of motivation are theories of motivation focus on the strength of physiological factors (hunger, thirst etc) in activating motivated behaviour. The purpose of this behaviour is seen as relieving bodily tension to restore homeostasis. These sources include biological drives, such as hunger and thirst, which are essential for survival. Additionally, intrinsic motivation can stem from personal interests, values, and the inherent satisfaction derived from engaging in an activity."
+      }
+    ],
+    "domain": "motivation",
+    "techniques": [
+      "engagement",
+      "positive_psychology",
+      "learned_resourcefullness"
+    ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What are emotions?"
+      },
+      {
+        "role": "assistant",
+        "content": "Emotions are subjective feelings (happy,sad, angry). Emotions have motivational value and can activate behaviour. Emotions are indicators of motivation."
+      }
+    ],
+    "domain": "motivation",
+    "techniques": [
+      "mood_regulation_processes",
+      "regulation_of_emotions",
+      "secondary_emotions"
+    ]
   }
-
-
 ]
