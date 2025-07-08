@@ -319,5 +319,23 @@
       "regulation_of_emotions",
       "secondary_emotions"
     ]
-  }
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "I struggling to understand the nature of values in terms of psychology and what it entails?"
+      },
+      {
+        "role": "assistant",
+        "content": "A value implies that people believe in a behaviour and prefer it to other behaviours to act accordingly"
+      }
+    ],
+    "domain": "motivation",
+    "techniques": [
+      "engagement",
+      "positive_psychology",
+      "learned_resourcefullness"
+    ]
+  },
 ]
