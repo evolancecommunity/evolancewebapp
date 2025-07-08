@@ -818,7 +818,7 @@ async def learning_experience_questionaire():
                 "category": "user research"
             }
         ]
-        await db.multiple_choice_questions.insert_many(questions)
+        await db.learning_experience_questionaire.insert_many(questions)
 
 
 async def initialize_sample_stories():
