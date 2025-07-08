@@ -53,7 +53,7 @@
       "compassion"
     ]
   },
-   // Psychology Terminology and Concepts
+
    {
     "conversation": [
       {
@@ -183,6 +183,45 @@
         "content": "Memory is the cognitive ability to store and retrieve information. There are several types of memory, including sensory memory, short-term memory, and long-term memory. Sensory memory holds brief impressions of sensory information, short-term memory temporarily holds information for processing, and long-term memory stores information for extended periods."
       }
     ],
+    "domain": "memory",
+    "techniques": [
+      "elaborate_rehearsal",
+      "mnemonics",
+      "simplifying_information",
+      "mood",
+      "humour_and_exaggeration"
+    ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Define the term forgetting relating to memory?"
+      },
+      {
+        "role": "assistant",
+        "content": "Forgetting is the inability to retrieve information from long term memory. with the help of cues, it can be recovered."
+      }
+    ],
+    "domain": "memory",
+    "techniques": [
+      "motivated_forgetting",
+      "distortion",
+      "false memories",
+      "mood"
+    ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "Define the term intelligence and the three approaches associated with it"
+      },
+      {
+        "role": "assistant",
+        "content": "Intelligence is the general and specific abilities which enables people to adjust their environment.This influences how we analyse jobs with regard to intellectual demands, and how ability tests are developed. The three main approaches are structural approach, pragmatic approach and emotional intelligence. Structured involves elements of intelligence have been determined and analysed through factor analysis. Pragmatic approach is concerned with the design and use of various ability tests. Emotional intelligence considers how emotions and interpersonal relationships are managed"
+      }
+    ],
     "domain": "Memory",
     "techniques": [
       "elaborate_rehearsal",
@@ -191,6 +230,25 @@
       "mood",
       "humour_and_exaggeration"
     ]
+  },
+  {
+    "conversation": [
+      {
+        "role": "user",
+        "content": "What is the classification of IQ scores?"
+      },
+      {
+        "role": "assistant",
+        "content": "IQ scores are typically classified into several categories based on their range. These categories include: \n- Below 70: Intellectual Disability \n- 70-84: Borderline Intellectual Functioning \n- 85-114: Average Intelligence \n- 115-129: Above Average Intelligence \n- 130 and above: Gifted or Highly Intelligent"
+      }
+    ],
+    "domain": "iq_scores",
+    "techniques": [
+      "learning_potential",
+      "cognitive_abilities",
+      "sat"
+    ]
   }
+
 
 ]
