@@ -99,6 +99,76 @@ class FreeDataCollector:
                 "content": "Mindfulness is the practice of being present in the moment...",
                 "category": "mindfulness",
                 "domain": "psychology"
+            },
+
+            {
+                "title": "Social Psychology: A South African Perspective",
+                "content": "Examines how individuals' thoughts, feelings, and behaviors are influenced by the actual, imagined, or implied presence of others.",
+                "category": "social psychology",
+                "domain": "psychology"
+            },
+
+            {
+                "title": "Developmental Psychology: A Life-Span View (South African Edition)",
+                "content": "Covers human growth and development from conception through old age.",
+                "category": "developmental psychology",
+                "domain": "psychology"
+            },
+
+            {
+                "title": "Cognitive Psychology",
+                "content": "Investigates mental processes such as perception, memory, language, problem-solving, and decision-making.",
+                "category": "cognitive psychology",
+                "domain": "psychology"
+            },
+
+            {
+                "title": "Biological Psychology",
+                "content": "Explores the biological bases of behavior and mental processes, including neuroscience and genetics.",
+                "category": "biological psychology",
+                "domain": "psychology"
+            },
+            {
+                "title": "Man's Search for Meaning",
+                "content": "Victor Frankl's classic on logotherapy and finding meaning in suffering, a universally impactful book often recommended in existential psychology.",
+                "category": "existential psychology",
+                "domain": "psychology"
+            },
+            {
+                "title": "The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma",
+                "content": "Bessel van der Kolk's influential work on the lasting impact of trauma on the body and mind, and various therapeutic approaches.",
+                "category": "trauma",
+                "domain": "psychology"
+            },
+            {
+                "title": "Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones",
+                "content": "James Clear's practical guide on habit formation and continuous improvement, widely popular in self-help and applied psychology.",
+                "category": "positive psychology",
+                "domain": "psychology"
+            },
+            {
+                "title": "Biological Psychology",
+                "content": "Explores the biological bases of behavior and mental processes, including neuroscience and genetics.",
+                "category": "biological psychology",
+                "domain": "psychology"
+            },
+            {
+                "title": "Abnormal Psychology: An Integrative Approach (South African Edition)",
+                "content": "Explores the nature,causes, and treatment of psychological disorders.",
+                "category": "abnormal psychology",
+                "domain": "psychology"
+            },
+            {
+                "title": "Thinking, Fast and Slow",
+                "content": "Daniel Kahneman's groundbreaking work on the two systems of thought that shape our judgments and decisions, key for cognitive psychology and behavioral economics.",
+                "category": "cognitive psychology",
+                "domain": "psychology"
+            },
+            {
+                "title": "Children In Mind: Their Mental Health In Today's World And What We Can Do To Help Them",
+                "content": "A book by Jenny Perkel, a South African clinical psychologist, addressing child mental health issues relevant to the local context.",
+                "category": "child psychology",
+                "domain": "psychology"
             }
         ]
         
