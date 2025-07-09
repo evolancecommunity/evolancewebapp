@@ -78,7 +78,7 @@ const Auth = () => {
             </svg>
           </div>
           <h1 className="text-4xl font-bold text-white mb-2">Evolance</h1>
-          <p className="text-purple-200">Your spiritual journey begins here</p>
+          <p className="text-purple-200">You are one step closer to better emotional health</p>
         </div>
 
         {/* Auth Form */}

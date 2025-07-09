@@ -3,64 +3,67 @@ import { AuthContext } from '../App';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const VideoLessons = () => {
-  const [videos, setVideos] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(null);
+const PodcastLessons = () => {
+  const [podcasts, setPodcasts] = useState([]);
+  const [selectedPodcast, setSelectedPodcast] = useState(null);
   const [reviews, setReviews] = useState([]);
   const [userReview, setUserReview] = useState({ rating: 5, review_text: '' });
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [videoLoading, setVideoLoading] = useState(false);
+  const [podcastLoading, setPodcastLoading] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [playbackSpeed, setPlaybackSpeed] = useState(1);
   
-  const videoRef = useRef(null);
+  const podcastRef = useRef(null);
   const containerRef = useRef(null);
 
   const { user, API } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchVideos();
+    fetchPodcasts();
   }, []);
 
   useEffect(() => {
-    if (selectedVideo) {
-      fetchVideoReviews(selectedVideo.id);
+    if (selectedPodcast) {
+      fetchPodcastReviews(selectedPodcast.id);
     }
-  }, [selectedVideo]);
+  }, [selectedPodcast]);
 
-  const fetchVideos = async () => {
+  const fetchPodcasts = async () => {
+    setPodcastLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${API}/videos`, {
+      const response = await axios.get(`${API}/podcasts`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setVideos(response.data);
+      setPodcasts(response.data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching videos:', error);
+      console.error('Error fetching podcasts:', error);
       setLoading(false);
+    } finally {
+      setPodcastLoading(false);
     }
   };
 
-  const fetchVideoReviews = async (videoId) => {
+  const fetchPodcastReviews = async (podcastId) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.get(`${API}/videos/${videoId}/reviews`, {
+      const response = await axios.get(`${API}/podcasts/${podcastId}/reviews`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setReviews(response.data);
     } catch (error) {
-      console.error('Error fetching reviews:', error);
+      console.error('Error fetching podcast reviews:', error);
     }
   };
 
   const submitReview = async () => {
     try {
       const token = localStorage.getItem('token');
-      await axios.post(`${API}/videos/review`, {
-        video_id: selectedVideo.id,
+      await axios.post(`${API}/podcasts/review`, {
+        podcast_id: selectedPodcast.id,
         rating: userReview.rating,
         review_text: userReview.review_text
       }, {
@@ -69,7 +72,7 @@ const VideoLessons = () => {
       
       setShowReviewForm(false);
       setUserReview({ rating: 5, review_text: '' });
-      fetchVideoReviews(selectedVideo.id);
+      fetchPodcastReviews(selectedPodcast.id);
     } catch (error) {
       console.error('Error submitting review:', error);
     }
@@ -98,8 +101,8 @@ const VideoLessons = () => {
 
   const changePlaybackSpeed = (speed) => {
     setPlaybackSpeed(speed);
-    if (videoRef.current) {
-      videoRef.current.playbackRate = speed;
+    if (podcastRef.current) {
+      podcastRef.current.playbackRate = speed;
     }
   };
 
@@ -161,36 +164,36 @@ const VideoLessons = () => {
               Back to Dashboard
             </button>
 
-            <h1 className="text-2xl font-bold text-white">Video Lessons</h1>
+            <h1 className="text-2xl font-bold text-white">Podcasts</h1>
 
             <div className="flex items-center space-x-2">
-              <span className="text-purple-200 text-sm">{videos.length} Lessons</span>
+              <span className="text-purple-200 text-sm">{podcasts.length} Podcasts</span>
             </div>
           </div>
         </div>
       </header>
 
       <div className="relative z-10 p-6">
-        {!selectedVideo ? (
-          /* Video Grid */
+        {!selectedPodcast ? (
+          /* Podcast Grid */
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                Spiritual Video Lessons
+                Emotional Wellness Podcasts
               </h2>
               <p className="text-purple-200 text-lg md:text-xl max-w-2xl mx-auto">
-                Learn from spiritual mentors and deepen your understanding through guided video lessons
+                Listen to experts and deepen your understanding through guided podcasts
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {videos.map((video) => (
+              {podcasts.map((podcast) => (
                 <div
-                  key={video.id}
+                  key={podcast.id}
                   className="glass-effect rounded-2xl overflow-hidden spiritual-glow cursor-pointer transform hover:scale-105 transition-all duration-300"
-                  onClick={() => setSelectedVideo(video)}
+                  onClick={() => setSelectedPodcast(podcast)}
                 >
-                  {/* Video Thumbnail */}
+                  {/* Podcast Thumbnail or Icon */}
                   <div className="relative h-48 bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center">
                     <div className="absolute inset-0 bg-black bg-opacity-40"></div>
                     <svg className="w-16 h-16 text-white opacity-80 z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -207,25 +210,25 @@ const VideoLessons = () => {
                     </div>
 
                     {/* Difficulty Badge */}
-                    <div className={`absolute top-4 left-4 px-2 py-1 rounded-full text-xs font-medium text-white ${getDifficultyColor(video.difficulty_level)}`}>
-                      {getDifficultyText(video.difficulty_level)}
+                    <div className={`absolute top-4 left-4 px-2 py-1 rounded-full text-xs font-medium text-white ${getDifficultyColor(podcast.difficulty_level)}`}>
+                      {getDifficultyText(podcast.difficulty_level)}
                     </div>
 
                     {/* Duration */}
                     <div className="absolute bottom-4 right-4 bg-black bg-opacity-60 px-2 py-1 rounded text-xs text-white">
-                      {video.duration}
+                      {podcast.duration}
                     </div>
                   </div>
 
-                  {/* Video Info */}
+                  {/* Podcast Info */}
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-2">{video.title}</h3>
-                    <p className="text-purple-200 text-sm leading-relaxed mb-4">{video.description}</p>
+                    <h3 className="text-xl font-semibold text-white mb-2">{podcast.title}</h3>
+                    <p className="text-purple-200 text-sm leading-relaxed mb-4">{podcast.description}</p>
                     
                     <div className="flex justify-between items-center">
                       <div>
-                        <p className="text-purple-300 text-sm font-medium">{video.mentor_name}</p>
-                        <p className="text-purple-400 text-xs">{video.category}</p>
+                        <p className="text-purple-300 text-sm font-medium">{podcast.mentor_name}</p>
+                        <p className="text-purple-400 text-xs">{podcast.category}</p>
                       </div>
                       <div className="text-right">
                         <div className="flex items-center text-yellow-400 text-sm">
@@ -243,20 +246,20 @@ const VideoLessons = () => {
             </div>
           </div>
         ) : (
-          /* Video Player */
+          /* Podcast Player */
           <div className="max-w-6xl mx-auto">
             <button
-              onClick={() => setSelectedVideo(null)}
+              onClick={() => setSelectedPodcast(null)}
               className="mb-6 flex items-center text-purple-200 hover:text-white transition-colors duration-200"
             >
               <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
-              Back to Videos
+              Back to Podcasts
             </button>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Video Player Section */}
+              {/* Podcast Player Section */}
               <div className="lg:col-span-2">
                 <div 
                   ref={containerRef}
@@ -269,14 +272,14 @@ const VideoLessons = () => {
                         <svg className="w-24 h-24 text-white opacity-60 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.01M15 10h1.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <p className="text-white text-lg mb-2">{selectedVideo.title}</p>
-                        <p className="text-purple-200">Video content coming soon</p>
+                        <p className="text-white text-lg mb-2">{selectedPodcast.title}</p>
+                        <p className="text-purple-200">Podcast content coming soon</p>
                       </div>
                     </div>
                   </div>
 
-                  {/* Video Controls */}
-                  <div className="video-controls">
+                  {/* Podcast Controls */}
+                  <div className="podcast-controls">
                     <div className="flex justify-between items-center">
                       <div className="flex items-center space-x-4">
                         <button className="text-white hover:text-purple-300 transition-colors">
@@ -314,28 +317,28 @@ const VideoLessons = () => {
                   </div>
                 </div>
 
-                {/* Video Information */}
+                {/* Podcast Information */}
                 <div className="mt-6 glass-effect rounded-2xl p-6 spiritual-glow">
-                  <h2 className="text-3xl font-bold text-white mb-4">{selectedVideo.title}</h2>
-                  <p className="text-purple-200 leading-relaxed mb-6">{selectedVideo.description}</p>
+                  <h2 className="text-3xl font-bold text-white mb-4">{selectedPodcast.title}</h2>
+                  <p className="text-purple-200 leading-relaxed mb-6">{selectedPodcast.description}</p>
                   
                   <div className="flex flex-wrap items-center gap-4 mb-6">
                     <div className="flex items-center">
                       <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-cyan-400 rounded-full flex items-center justify-center mr-3">
-                        <span className="text-white font-bold text-lg">{selectedVideo.mentor_name[0]}</span>
+                        <span className="text-white font-bold text-lg">{selectedPodcast.mentor_name[0]}</span>
                       </div>
                       <div>
-                        <p className="text-white font-medium">{selectedVideo.mentor_name}</p>
+                        <p className="text-white font-medium">{selectedPodcast.mentor_name}</p>
                         <p className="text-purple-300 text-sm">Spiritual Mentor</p>
                       </div>
                     </div>
                     
-                    <div className={`px-3 py-1 rounded-full text-sm font-medium text-white ${getDifficultyColor(selectedVideo.difficulty_level)}`}>
-                      {getDifficultyText(selectedVideo.difficulty_level)}
+                    <div className={`px-3 py-1 rounded-full text-sm font-medium text-white ${getDifficultyColor(selectedPodcast.difficulty_level)}`}>
+                      {getDifficultyText(selectedPodcast.difficulty_level)}
                     </div>
                     
                     <div className="text-purple-300">
-                      <span className="text-sm">{selectedVideo.duration}</span>
+                      <span className="text-sm">{selectedPodcast.duration}</span>
                     </div>
                   </div>
                 </div>
@@ -458,4 +461,4 @@ const VideoLessons = () => {
   );
 };
 
-export default VideoLessons;
+export default PodcastLessons;

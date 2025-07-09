@@ -406,8 +406,8 @@ Keep insights spiritual, profound but accessible, and encouraging."""
             
             insights_text = response.choices[0].message.content
             if insights_text:
-            insights = [insight.strip() for insight in insights_text.split('\n') if insight.strip() and not insight.strip().startswith('#')]
-            return insights[:4]  # Max 4 insights
+                insights = [insight.strip() for insight in insights_text.split('\n') if insight.strip() and not insight.strip().startswith('#')]
+                return insights[:4]  # Max 4 insights
             
         except Exception as e:
             logger.error(f"OpenAI API error for insights: {e}")
