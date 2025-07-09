@@ -630,6 +630,73 @@ async def psychology_multiple_choice_questions():
         ]
         await db.multiple_choice_questions.insert_many(questions)
 
+        
+# Self evaluation - Psychologist
+async def self_evaluation_questions():
+    self_evaluation_questions = await db.self_evaluation_questions.count_documents({})
+    if self_evaluation_questions == 0:
+        questions = [
+            {
+                "id": str(uuid.uuid4()),
+                "question": """A middle manager is feeling aggressive towards top management,but for various reasons he does not display his feelings towards them.
+                 Instead he starts to interact aggressively with his subordinates. 
+                 Subsequently his performance and that of his department deteriorates rapidly and influences the performance of the rest of the orgainisation. 
+                 Top management calls on you as an Industrial psychologist to help them evaluate and study this problem and make the most appropriate intervention. 
+                 What field of industrial psychology is at issue in this case?""",
+                "options": [
+                    "Ergonomics",
+                    "Personal psychology",
+                    "Research methodology",
+                    "Consumer psychology",
+                    "Orgainizational psychology"
+                ],
+                "category": "self_evaluation"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": "You are an I/O psychologist in private practice. A person who suffered some impairment in terms of his physical and cognitive functions in a car accident asks you to refer him to a psychologist who could help him develop corrective actions that would address the brain injury. You refer him to a ____ ",
+                "options": [
+                    "Career counsellor",
+                    "Neuropsychologist",
+                    "Clinical psychology",
+                    "Orgainisational psychology",
+                    "Consumer psychology"
+                ],
+                "category": "self_evaluation"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": """Joe notices two men who seem to be having a heated exchange.
+                 They are speaking loudly and one man is slapping the other one on the shoulder.
+                 The same situation would have been interpreted differently had it occured in a subdued banking environment or at a large soccer gathering.
+                 The difference in the intepretation of the behaviour would depend on ____""",
+                "options": [
+                    "The perceiver",
+                    "The situation",
+                    "The perceived target(s)",
+                    "Subjective interpretation",
+                    "the loudness of their voices"
+                ],
+                "category": "self_evaluation"
+            },
+            {
+                "id": str(uuid.uuid4()),
+                "question": """You are 20 years of age invited to a work party at which a new product is launched.
+                 While observing the people socialising,
+                 Which of the following strikes you as out of place in terms of your knowledge of affliliation behaviours?""",
+                "options": [
+                    "A older,smartly dressed woman in the company of a markedly younger man.",
+                    "An attractive young woman in the company of a not-so-attractive older man, who is the sales director of the company.",
+                    "Two attractive well known sports personalities together",
+                    "A tall woman in her thirties, who is a senior manager in the marketing department accompanying a friend in his thirties who has just been appointed Marketing Director in the company.",
+                    "The Chief Executive Officer of the company in the company of other Chief Executive Officers."
+                ],
+                "category": "self_evaluation"
+            }
+        ]
+        await db.self_evaluation_questions.insert_many(questions)
+
+
 # Learning Experience Questionaire
 
 async def learning_experience_questionaire():
