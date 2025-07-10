@@ -3,6 +3,9 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+from services.emotion_service import detect_emotion 
+from services.data_service import get_psychology_book_suggestions
+from services.data_service import get_meditation_book_suggestions
 import os
 import logging
 from pathlib import Path
@@ -326,7 +329,7 @@ async def get_chat_history(conversation_id: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An error occurred: {str(e)}"
         )
-
+    
     
 
 # Utility functions
