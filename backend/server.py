@@ -263,6 +263,13 @@ class ConversationLogEntry(BaseModel):
     user_message: str
     ai_full_response: AIResponse
     timestamp: datetime
+
+class EmotionData(BaseModel):
+    emotion: str
+    score: float
+    emojics: str
+    reason: Optional[str] = None
+
          
 
 # FastAPI endpoints - Emolytics
