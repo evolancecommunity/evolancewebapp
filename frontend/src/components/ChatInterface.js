@@ -12,6 +12,8 @@ const ChatInterface = () => {
   const [recognition, setRecognition] = useState(null);
   const [showCrisisAlert, setShowCrisisAlert] = useState(false);
   const [chatMode, setChatMode] = useState('support'); // support, therapy, reflection
+  const [learningStatus, setLearningStatus] = useState(null);
+  const [modelUsed, setModelUsed] = useState('gemini');
   const messagesEndRef = useRef(null);
 
   const { user, API } = useContext(AuthContext);
@@ -102,21 +104,45 @@ const ChatInterface = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post(`${API}/chat/message`, 
-        `message=${encodeURIComponent(messageToSend)}${storyContext ? `&story_context=${storyContext}` : ''}`,
+      const response = await axios.post(`${API}/ai/gemini-chat`, 
+        { message: messageToSend },
         {
           headers: { 
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
           }
         }
       );
 
-      if (response.data.crisis_detected) {
-        setShowCrisisAlert(true);
-      }
+      // Create AI response message with emotion analysis
+      const aiMessage = {
+        id: Date.now().toString(),
+        user_id: 'ai',
+        message: response.data.response,
+        is_user: false,
+        timestamp: new Date().toISOString(),
+        emotionAnalysis: response.data.emotion_analysis,
+        emolyticsUpdate: response.data.emolytics_update,
+        modelUsed: response.data.model_used
+      };
 
-      setMessages(prev => [...prev, response.data]);
+      setMessages(prev => [...prev, aiMessage]);
+      
+      // Update learning status
+      if (response.data.learning_status) {
+        setLearningStatus(response.data.learning_status);
+      }
+      
+      // Update model used
+      if (response.data.model_used) {
+        setModelUsed(response.data.model_used);
+      }
+      
+      // Log emolytics update for debugging
+      if (response.data.emolytics_update) {
+        console.log('Emolytics updated:', response.data.emolytics_update);
+      }
+      
     } catch (error) {
       console.error('Error sending message:', error);
       setMessages(prev => [...prev, {
@@ -189,6 +215,21 @@ const ChatInterface = () => {
                 <span className="text-2xl">{getChatModeIcon(chatMode)}</span>
                 <h1 className="text-xl font-semibold text-white">{getChatModeLabel(chatMode)}</h1>
               </div>
+              
+              {/* Learning Status Indicator */}
+              {learningStatus && (
+                <div className="flex items-center space-x-2 px-3 py-1 bg-slate-700/50 rounded-lg border border-slate-600/50">
+                  <div className={`w-2 h-2 rounded-full ${
+                    modelUsed === 'trained' ? 'bg-emerald-500' : 'bg-blue-500'
+                  }`}></div>
+                  <span className="text-xs text-slate-300">
+                    {modelUsed === 'trained' ? 'Trained AI' : 'Gemini AI'}
+                  </span>
+                  <div className="text-xs text-slate-400">
+                    ({learningStatus.total_interactions} interactions)
+                  </div>
+                </div>
+              )}
             </div>
 
             <div className="flex items-center space-x-3">
@@ -244,6 +285,64 @@ const ChatInterface = () => {
                       {formatTimestamp(message.timestamp)}
                     </div>
                   </div>
+                  
+                  {/* Emotion Analysis Display */}
+                  {!message.is_user && message.emotionAnalysis && (
+                    <div className="mt-3 p-4 bg-slate-800/50 border border-slate-600/30 rounded-xl">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center">
+                          <span className="text-emerald-400 mr-2">🧠</span>
+                          <span className="text-sm font-medium text-slate-300">Emotion Analysis</span>
+                        </div>
+                        {message.modelUsed && (
+                          <div className="flex items-center space-x-1">
+                            <div className={`w-2 h-2 rounded-full ${
+                              message.modelUsed === 'trained' ? 'bg-emerald-500' : 'bg-blue-500'
+                            }`}></div>
+                            <span className="text-xs text-slate-400">
+                              {message.modelUsed === 'trained' ? 'Trained' : 'Gemini'}
+                            </span>
+                          </div>
+                        )}
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-slate-400">Primary Emotion:</span>
+                          <span className="text-xs font-medium text-emerald-300 capitalize">
+                            {message.emotionAnalysis.primary_emotion}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-xs text-slate-400">Intensity:</span>
+                          <div className="flex items-center">
+                            <div className="w-16 h-2 bg-slate-600 rounded-full mr-2">
+                              <div 
+                                className="h-2 bg-emerald-500 rounded-full transition-all duration-300"
+                                style={{ width: `${message.emotionAnalysis.emotion_intensity}%` }}
+                              ></div>
+                            </div>
+                            <span className="text-xs text-slate-300">
+                              {message.emotionAnalysis.emotion_intensity}%
+                            </span>
+                          </div>
+                        </div>
+                        {message.emotionAnalysis.secondary_emotions && message.emotionAnalysis.secondary_emotions.length > 0 && (
+                          <div className="flex justify-between items-center">
+                            <span className="text-xs text-slate-400">Secondary:</span>
+                            <span className="text-xs text-slate-300">
+                              {message.emotionAnalysis.secondary_emotions.join(', ')}
+                            </span>
+                          </div>
+                        )}
+                        {message.emotionAnalysis.reasoning && (
+                          <div className="mt-2 p-2 bg-slate-700/30 rounded text-xs text-slate-300">
+                            <span className="text-slate-400">Reasoning: </span>
+                            {message.emotionAnalysis.reasoning}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
                 
                 {!message.is_user && (

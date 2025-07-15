@@ -1,5 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import './Emolytics.css';
+import React, { useState, useEffect, useRef } from 'react';
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Brush
+} from 'recharts';
+import InteractiveAvatar, { EvIcon, EvBubble } from './InteractiveAvatar';
+import avatar from '../assets/avatar.png';
+import '../EmolyticsAnimations.css';
+
+const emotionColors = {
+  Joy: '#facc15',
+  Sadness: '#3b82f6',
+  Anger: '#ef4444',
+  Fear: '#a21caf',
+  Surprise: '#06b6d4',
+  Disgust: '#22c55e',
+};
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
@@ -10,10 +24,29 @@ const Emolytics = ({ user }) => {
   const [insights, setInsights] = useState([]);
   const [loading, setLoading] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
+  const [emotionData, setEmotionData] = useState({});
+  const [loadingEmolytics, setLoadingEmolytics] = useState(true);
+  const [errorEmolytics, setErrorEmolytics] = useState(null);
 
   useEffect(() => {
     loadEmotionalProfile();
     loadInsights();
+    const token = localStorage.getItem('token');
+    fetch(`${BACKEND_URL}/api/ai/emotional-state/timeseries`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch emolytics');
+        return res.json();
+      })
+      .then(data => {
+        setEmotionData(data.emotions || data); // adjust if backend wraps in {emotions: ...}
+        setLoadingEmolytics(false);
+      })
+      .catch(err => {
+        setErrorEmolytics(err.message);
+        setLoadingEmolytics(false);
+      });
   }, []);
 
   const getToken = () => localStorage.getItem('token');
@@ -125,6 +158,10 @@ const Emolytics = ({ user }) => {
     };
     return icons[emotion] || '😐';
   };
+
+  if (loadingEmolytics) return <div className="text-white text-center py-12">Loading your emolytics...</div>;
+  if (errorEmolytics) return <div className="text-red-400 text-center py-12">Error: {errorEmolytics}</div>;
+  if (!emotionData || Object.keys(emotionData).length === 0) return <div className="text-white text-center py-12">No emolytics data yet.</div>;
 
   return (
     <div className="emolytics">
