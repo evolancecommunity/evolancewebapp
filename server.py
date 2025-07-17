@@ -3,9 +3,11 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-from services.emotion_service import detect_emotion 
-from services.data_service import get_psychology_book_suggestions
-from services.data_service import get_meditation_book_suggestions
+from backend.services.emotion_service import detect_emotion 
+from backend.services.data_service import get_psychology_book_suggestions
+from backend.services.data_service import get_meditation_book_suggestions
+from backend.services.log_service import log_service
+from backend.services.ai_response_generator import process_user_input_for_ai_response
 import os
 import logging
 from pathlib import Path
@@ -283,7 +285,7 @@ class EmotionLog(BaseModel):
 
     class Config:
         json_encoders = {
-            datetime: lambda v: v.isoformat()
+            datetime: lambda dt: dt.isoformat() + "z"
         }
          
 
@@ -291,8 +293,8 @@ class EmotionLog(BaseModel):
 
 router = APIRouter()
 
-@router.post("/chat", response_model=AIResponse, status_code=status.HTTP_200_OK)
-async def chat_with_ai(user_input: UserInput):
+@router.post("/chat", response_model=AIResponse,summary = "Process user input and generate AI response")
+async def chat_with_emolytics(user_input: UserInput):
     """
     Main endpoint for conversational AI interaction.
     Processes user input, generates AI response with emotion detection,
@@ -300,7 +302,8 @@ async def chat_with_ai(user_input: UserInput):
     """
     try:
         # Process the user input to get the full AI response
-        ai_full_response: AIResponse = detect_emotion(user_input)
+        response= process_user_input_for_ai_response(user_input)
+
 
         # Create a log entry for the conversation turn
         conversation_log_entry = ConversationLogEntry(
@@ -308,7 +311,7 @@ async def chat_with_ai(user_input: UserInput):
             conversation_id=user_input.conversation_id,
             turn_number=user_input.turn_number,
             user_message=user_input.message,
-            ai_full_response=ai_full_response
+            response=response
         )
 
         # Insert the log entry into MongoDB
@@ -320,7 +323,7 @@ async def chat_with_ai(user_input: UserInput):
             # Log this error internally, but still return the AI response to the user
             print(f"ERROR: Failed to log conversation turn for user {user_input.user_id}, conv {user_input.conversation_id}")
 
-        return ai_full_response
+        return response
 
     except Exception as e:
         # Log the exception for debugging
@@ -329,6 +332,29 @@ async def chat_with_ai(user_input: UserInput):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An internal error occurred: {str(e)}"
         )
+    
+# Log summary for the MongoDB    
+@router.get("/logs", response_model=List[EmotionLog], summary ="Retrieve all interaction logs")    
+async def get_logs():
+    """Retrieves all stored interaction logs from MongoDB."""
+    logs = log_service.get_all_log_entries()
+    if not logs:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No logs found.")
+    return logs
+
+# You might want to add a health check endpoint
+@router.get("/health", summary="Health check endpoint")
+async def health_check():
+    """Checks the health of the API and database connection"""
+    if log_service.client.admin.command('ping'):
+        try:
+            log_service.client.admin.command('ping')
+            return {"status": "healthy", "database_connection": "successful"}
+        except ConnectionError:
+            return {"status": "unhealthy", "database_connection": "unsuccessful"}
+    else:
+            return {"status": "unhealthy", "database_connection": "not_initialized"}
+
 
 @router.get("/chat/history/{conversation_id}", response_model=List[ConversationLogEntry])
 async def get_chat_history(conversation_id: str):
