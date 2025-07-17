@@ -11,7 +11,15 @@ For a more "conversational AI," you'd integrate a more advanced LLM
 
 
 import random
+import logging
 from services.data_service import data_service
+# Import the log service
+from services.log_service import log_service
+# import the log model
+from evolancewebapp.backend.server import EmotionLog
+from datetime import datetime
+
+
 
 class AIResponseService:
     def __init__(self):
@@ -80,7 +88,7 @@ class AIResponseService:
             if psych_suggestions and meditation_suggestions:
                 response_text += f" For a general read, you might like '{psych_suggestions[0]['title']}' (psychology) or '{meditation_suggestions[0]['title']}' (meditation)."
 
-        return {
+        final_response = {
             "ai_response": response_text,
             "emojics": emojics,
             "detected_emotion": emotion,
@@ -88,6 +96,23 @@ class AIResponseService:
             "suggested_psych_books": psych_suggestions,
             "suggested_meditation_books": meditation_suggestions
         }
+
+        # Add logging service here
+
+        try:
+            log_entry = EmotionLog(
+                user_text=user_text,
+                detected_emotion=emotion,
+                reason_for_emotion=reason_for_emotion,
+                suggested_psych_books=psych_suggestions,
+                suggested_meditation_books=meditation_suggestions,
+                emojics=emojics,
+                reason_for_emotion=reason_for_emotion
+            )
+            log_service.insert_log_entry(log_entry)
+        except Exception as e:
+            logging.error(f"Failed to insert log entry: {e}")
+        return final_response
 
 # Global instance
 ai_response_service = AIResponseService()
