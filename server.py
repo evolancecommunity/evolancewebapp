@@ -257,6 +257,9 @@ class AIResponse(BaseModel):
     reason_for_emotion: str
     suggested_psych_books: list
     suggested_meditation_books: list  
+    message: str
+    event_id: str
+    timestamp: datetime
 
 class ConversationLogEntry(BaseModel):
     user_id: str
@@ -284,16 +287,38 @@ class EmotionLog(BaseModel):
     reason_for_emotion: str
 
     class Config:
+        populate_by_name = True
         json_encoders = {
             datetime: lambda dt: dt.isoformat() + "z"
         }
-         
+# Button Model for emolytics
+
+class ButtonClickEvent(BaseModel):
+   """
+   Pydantic model for the data received when a button is clicked.
+   """    
+   user_id: str
+   button_name: str
+   action_description: Optional[str]
+
+class ButtonClickLog(BaseModel):
+    """
+    Pydantic model for the data stored in MongoDB.
+    Includes a timestamp for when the event occurred.
+    """   
+    id: str 
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    user_id: str
+    button_name: str
+    action_description: Optional[str]
+
+
+
+
 
 # FastAPI endpoints - Emolytics
 
-router = APIRouter()
-
-@router.post("/chat", response_model=AIResponse,summary = "Process user input and generate AI response")
+@api_router.post("/chat", response_model=AIResponse,summary = "Process user input and generate AI response")
 async def chat_with_emolytics(user_input: UserInput):
     """
     Main endpoint for conversational AI interaction.
@@ -334,7 +359,7 @@ async def chat_with_emolytics(user_input: UserInput):
         )
     
 # Log summary for the MongoDB    
-@router.get("/logs", response_model=List[EmotionLog], summary ="Retrieve all interaction logs")    
+@api_router.get("/logs", response_model=List[EmotionLog], summary ="Retrieve all interaction logs")    
 async def get_logs():
     """Retrieves all stored interaction logs from MongoDB."""
     logs = log_service.get_all_log_entries()
@@ -343,7 +368,7 @@ async def get_logs():
     return logs
 
 # You might want to add a health check endpoint
-@router.get("/health", summary="Health check endpoint")
+@api_router.get("/health", summary="Health check endpoint")
 async def health_check():
     """Checks the health of the API and database connection"""
     if log_service.client.admin.command('ping'):
@@ -356,7 +381,7 @@ async def health_check():
             return {"status": "unhealthy", "database_connection": "not_initialized"}
 
 
-@router.get("/chat/history/{conversation_id}", response_model=List[ConversationLogEntry])
+@api_router.get("/chat/history/{conversation_id}", response_model=List[ConversationLogEntry])
 async def get_chat_history(conversation_id: str):
     """
     Retrieves the full chat history for a given conversation ID, including AI responses.
