@@ -302,15 +302,15 @@ class ButtonClickEvent(BaseModel):
    action_description: Optional[str]
 
 class ButtonClickLog(BaseModel):
-    """
-    Pydantic model for the data stored in MongoDB.
-    Includes a timestamp for when the event occurred.
-    """   
-    id: str 
-    timestamp: datetime = Field(default_factory=datetime.utcnow)
-    user_id: str
-    button_name: str
-    action_description: Optional[str]
+  """
+  Pydantic model for the data stored in MongoDB.
+  Includes a timestamp for when the event occurred.
+  """   
+  id: str 
+  timestamp: datetime = Field(default_factory=datetime.utcnow)
+  user_id: str
+  button_name: str
+  action_description: Optional[str]
 
 
 
