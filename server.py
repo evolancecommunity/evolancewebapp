@@ -3,6 +3,9 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+from services.emotion_service import detect_emotion 
+from services.data_service import get_psychology_book_suggestions
+from services.data_service import get_meditation_book_suggestions
 import os
 import logging
 from pathlib import Path
@@ -238,6 +241,118 @@ class FulfillmentCreate(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str
+
+class UserInput(BaseModel):
+    user_id: str
+    conversation_id: str
+    turn_number: int
+    message: str
+
+class AIResponse(BaseModel):
+    ai_response: str
+    emojics: str
+    detected_emotion: str
+    reason_for_emotion: str
+    suggested_psych_books: list
+    suggested_meditation_books: list  
+
+class ConversationLogEntry(BaseModel):
+    user_id: str
+    conversation_id: str
+    turn_number: int
+    user_message: str
+    ai_full_response: AIResponse
+    timestamp: datetime
+
+class EmotionData(BaseModel):
+    emotion: str
+    score: float
+    emojics: str
+    reason: Optional[str] = None
+
+class EmotionLog(BaseModel):
+    user_id: str
+    timestamp: datetime
+    user_input: str
+    detected_emotion: str
+    ai_response: str
+    suggested_psych_books: List[str]
+    suggested_meditation_books: List[str]
+    emojics: str
+    reason_for_emotion: str
+
+    class Config:
+        json_encoders = {
+            datetime: lambda v: v.isoformat()
+        }
+         
+
+# FastAPI endpoints - Emolytics
+
+router = APIRouter()
+
+@router.post("/chat", response_model=AIResponse, status_code=status.HTTP_200_OK)
+async def chat_with_ai(user_input: UserInput):
+    """
+    Main endpoint for conversational AI interaction.
+    Processes user input, generates AI response with emotion detection,
+    reasoning, emojics, and book suggestions, then logs the interaction.
+    """
+    try:
+        # Process the user input to get the full AI response
+        ai_full_response: AIResponse = detect_emotion(user_input)
+
+        # Create a log entry for the conversation turn
+        conversation_log_entry = ConversationLogEntry(
+            user_id=user_input.user_id,
+            conversation_id=user_input.conversation_id,
+            turn_number=user_input.turn_number,
+            user_message=user_input.message,
+            ai_full_response=ai_full_response
+        )
+
+        # Insert the log entry into MongoDB
+        # Convert Pydantic model to a dictionary for MongoDB insertion
+        log_data = conversation_log_entry.model_dump(exclude_none=True, by_alias=True)
+        result = db.conversations_log_collection.insert_one(log_data)
+
+        if not result.inserted_id:
+            # Log this error internally, but still return the AI response to the user
+            print(f"ERROR: Failed to log conversation turn for user {user_input.user_id}, conv {user_input.conversation_id}")
+
+        return ai_full_response
+
+    except Exception as e:
+        # Log the exception for debugging
+        print(f"An error occurred during chat processing: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An internal error occurred: {str(e)}"
+        )
+
+@router.get("/chat/history/{conversation_id}", response_model=List[ConversationLogEntry])
+async def get_chat_history(conversation_id: str):
+    """
+    Retrieves the full chat history for a given conversation ID, including AI responses.
+    """
+    try:
+        history_records = list(db.conversations_log_collection.find(
+            {"conversation_id": conversation_id}
+        ).sort("turn_number", 1))
+
+        if not history_records:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No chat history found for this conversation ID.")
+
+        return [ConversationLogEntry(**record) for record in history_records]
+
+    except Exception as e:
+        print(f"Error retrieving chat history: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An error occurred: {str(e)}"
+        )
+    
+    
 
 # Utility functions
 def verify_password(plain_password: str, hashed_password: str) -> bool:
