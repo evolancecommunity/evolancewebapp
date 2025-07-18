@@ -12,7 +12,7 @@ For a more "conversational AI," you'd integrate a more advanced LLM
 
 import random
 import logging
-from services.data_service import data_service
+from evolancewebapp.backend.services import data_service
 # Import the log service
 from services.log_service import log_service
 # import the log model
