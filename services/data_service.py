@@ -1,4 +1,4 @@
-from models import PSYCHOLOGY_BOOKS, MEDITATION_BOOKS
+from evolancewebapp.backend.models.data import PSYCHOLOGY_BOOKS, MEDITATION_BOOKS
 
 class DataService:
     def get_psychology_books(self):
