@@ -1,5 +1,6 @@
 from backend.server  import UserInput, AIResponse, EmotionData
-from backend.services.emotion_service import EmotionService
+from backend.services.emotion_service import emotion_service
+from backend.services.ai_response_service import ai_response_service
 from backend.models.data import PSYCHOLOGY_BOOKS, MEDITATION_BOOKS
 from typing import Tuple
 
@@ -55,20 +56,20 @@ def process_user_input_for_ai_response(user_input: UserInput) -> AIResponse:
      # 3. Get Book Suggestions
      # 4. Compile AIResponse
 
-    emotion_result: EmotionData = EmotionService.detect_emotion(user_input.message)
-    detected_emotion = emotion_result.emotion
-    reason_for_emotion = emotion_result.reason
+    detected_emotion_result = emotion_service.detect_emotion(user_input.message)
+    detected_emotion_label = detected_emotion_result["emotion"]
+    emotion_score = detected_emotion_result["score"]
 
-    ai_response_text, emojics  = generate_ai_response_text_and_emojics(user_input.message, detected_emotion)
+    full_ai_response_data = ai_response_service.generate_response(user_input.message, detected_emotion_result)
 
-    psychology_books = PSYCHOLOGY_BOOKS(detected_emotion)
-    meditation_books = MEDITATION_BOOKS(detected_emotion)
+    psychology_books = PSYCHOLOGY_BOOKS(detected_emotion_result)
+    meditation_books = MEDITATION_BOOKS(detected_emotion_result)
 
     return AIResponse(
-        ai_response = ai_response_text,
-        emojics = emojics,
-        detected_emotion = detected_emotion,
-        reason_for_emotion = reason_for_emotion,
+        ai_response = full_ai_response_data["ai_response"],
+        emojics = full_ai_response_data["emojics"],
+        detected_emotion = full_ai_response_data["detected_emotion"],
+        reason_for_emotion = full_ai_response_data["reason_for_emotion"],
         suggested_psychology_books = psychology_books,
         suggested_meditation_books = meditation_books
     )
