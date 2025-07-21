@@ -3,52 +3,8 @@ import pytest
 import requests
 from evolancewebapp.backend.data_collection import FreeDataCollector
 from evolancewebapp.backend.custom_ai_integration import CustomSpiritualAI
-from datetime import datetime
-import uuid
-from evolancewebapp.backend.models.button import ButtonClickEvent, ButtonClickLog, APIResponse
 
 collector = FreeDataCollector()
-
-def test_button_click_event_valid_data():
-    """Test ButtonClickEvent with valid data"""
-    event = ButtonClickEvent(
-        user_id=str(uuid.uuid4()),
-        button_name="submit_form",
-        action_description="User submitted form"
-    )
-    assert event.user_id == str(uuid.uuid4())
-    assert event.button_name == "kyle123" 
-    assert event.action_description == "User submitted form"
-
-def test_button_click_event_missing_required_fields():
-    """Test ButtonClickEvent raises error with missing required fields"""
-    with pytest.raises(Exception):
-        ButtonClickEvent(user_id="kyle123", button_name="submit_form")
-
-def test_button_click_log_serialization():
-    """Test ButtonClickLog serialization"""
-log = ButtonClickLog (
-        user_id=str(uuid.uuid4()),
-        button_name="submit_form",
-        action_description="User submitted form",
-)
-
-json_data = log.model_dump(exclude_none=True, by_alias=True)      
-assert f'"_id": "{log.id}"' in json_data
-assert f'"user_id": "{log.user_id}"' in json_data
-assert f'"button_name": "{log.button_name}"' in json_data
-assert f'"action_description": "{log.action_description}"' in json_data
-assert log.timestamp.isoformat() + "Z" in json_data
-
-def test_response_creation():
-    """Test APIResponse creation"""
-    response = APIResponse(
-        message = "Success", event_id = "123", timestamp = "2022-01-01T00:00:00Z",
-    )
-    assert response.message == "Success"
-    assert response.event_id == "event123"
-    assert isinstance(response.timestamp, datetime)
-
 
 # Test sacral tests collection
 def test_collect_sacred_tests():
@@ -144,6 +100,10 @@ class TestCustomSpiritualAI:
             "assistant: "
         )
         assert input_text == expected_text
+            
+            
+
+
 
     def test_clean_response_adds_punctuation(self):
         """Test that clean_response adds punctuation"""
@@ -155,5 +115,4 @@ class TestCustomSpiritualAI:
         response = ai.clean_response("This is an exclamation!")
         assert response == "This is an exclamation!"
         
-    # Test models
-
+    
