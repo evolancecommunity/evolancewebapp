@@ -1,8 +1,17 @@
+<<<<<<< HEAD
+=======
+from transformers import pipeline
+
+>>>>>>> neel
 class EmotionService:
     def __init__(self):
         print("Loading emotion.....This might take a moment.")
         # Hi Neel please add your model best suited for emotion detection
+<<<<<<< HEAD
         self.classifier("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+=======
+        self.classifier = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+>>>>>>> neel
         print("Emotion model loaded")
     def detect_emotion(self, text: str) -> dict:
         """

@@ -70,8 +70,13 @@ def process_user_input_for_ai_response(user_input: UserInput) -> AIResponse:
         emojics = full_ai_response_data["emojics"],
         detected_emotion = full_ai_response_data["detected_emotion"],
         reason_for_emotion = full_ai_response_data["reason_for_emotion"],
+<<<<<<< HEAD
         suggested_psychology_books = psychology_books,
         suggested_meditation_books = meditation_books
+=======
+        suggested_psychology_books = full_ai_response_data["suggested_psychology_books"],
+        suggested_meditation_books = full_ai_response_data["suggested_meditation_books"]
+>>>>>>> neel
     )
     
     
