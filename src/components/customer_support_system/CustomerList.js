@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { AuthContext } from "../App";
+import { AuthContext } from "../../App";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -23,12 +23,15 @@ const CustomerList = ({customers, onEdit, onDelete, onViewInteractions}) => {
                 <tbody className="bg-white divide-y divide-gray-200">
                 {customers.map((customer) => (
                     <tr key={customer.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">{customer.name}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{customer.email}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                        <button onClick={() => onEdit(customer)} className="text-blue-600 hover:text-blue-900 mr-2">Edit</button>
-                        <button onClick={() => onDelete(customer.id)} className="text-red-600 hover:text-red-900 mr-2">Delete</button>
-                        <button onClick={() => onViewInteractions(customer.id)} className="text-green-600 hover:text-green-900">View Interactions</button>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{customer.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{customer.email}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{customer.company || 'N/A'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                      <div className="flex items-center space-x-3">
+                        <button onClick={() => onEdit(customer)} className="text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out" title="Edit Customer"><Edit className="h-5 w-5" /></button>
+                        <button onClick={() => onDelete(customer.id)} className="text-red-600 hover:text-red-900 transition duration-150 ease-in-out" title="Delete Customer"><Trash className="h-5 w-5" /></button>
+                        <button onClick={() => onViewInteractions(customer.id)} className="text-green-600 hover:text-green-900 transition duration-150 ease-in-out" title="View Customer Interactions"><View className="h-5 w-5" /></button>
+                      </div>
                     </td>
                     </tr>
                 ))}
@@ -41,3 +44,5 @@ const CustomerList = ({customers, onEdit, onDelete, onViewInteractions}) => {
   )
 
 }
+
+export default CustomerList;
