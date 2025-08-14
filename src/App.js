@@ -358,8 +358,6 @@ function App() {
     }
   };
 
-
-
   useEffect(() => {
     checkAuthStatus();
 
@@ -493,7 +491,9 @@ function App() {
       {/* Customer Support */}
       <div className="min-h-screen bg-gray-100 font-sans antialiased text-gray-900 p-4 sm:p-6 lg:p-8">
         <header className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6 rounded-lg shadow-md mb-8">
-          <h1 className="text-4xl font-extrabold text-center tracking-tight">Customer Support</h1>
+          <h1 className="text-4xl font-extrabold text-center tracking-tight">
+            Customer Support
+          </h1>
           <p className="text-center text-blue-100 mt-2 text-lg">
             Manage customers, interactions, and support tickets
           </p>
@@ -501,7 +501,10 @@ function App() {
             <button
               onClick={() => setCurrentView("customers")}
               className={`flex items-center px-4 py-2 rounded-md transition duration-150 ease-in-out ${
-                currentView.startsWith('customer') || currentView.startsWith('interaction') ? 'bg-blue-800 text-white shadow-lg' : 'text-blue-200 hover:bg-blue-700 hover:text-white'
+                currentView.startsWith("customer") ||
+                currentView.startsWith("interaction")
+                  ? "bg-blue-800 text-white shadow-lg"
+                  : "text-blue-200 hover:bg-blue-700 hover:text-white"
               }`}
             >
               <Info className="h-5 w-5 mr-2" />
@@ -522,12 +525,21 @@ function App() {
 
         <main className="container mx-auto">
           {loading && <LoadingSpinner />}
-          {message && <MessageBox type ={message.type} message={message.message} onClose={closeMessageBox} onConfirm={message.onConfirm} />}
+          {message && (
+            <showMessageBox
+              type={message.type}
+              message={message.message}
+              onClose={closeMessageBox}
+              onConfirm={message.onConfirm}
+            />
+          )}
           {!loading && renderContent()}
         </main>
         <footer className="mt-8 text-center text-gray-600">
-          <p>{new Date().getFullYear()} © 2025 Evolance. All rights reserved.</p>
-      </footer>
+          <p>
+            {new Date().getFullYear()} © 2025 Evolance. All rights reserved.
+          </p>
+        </footer>
       </div>
     </>
   );
