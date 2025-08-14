@@ -197,3 +197,5 @@ const SupportTicketForm = ({ ticket, onSave, onCancel, customers }) => {
     </div>
   );
 };
+
+export default SupportTicketForm;
