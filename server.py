@@ -3,16 +3,34 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
+<<<<<<< Updated upstream
+<<<<<<<< Updated upstream:backend/server.py
+========
+=======
+>>>>>>> Stashed changes
 from backend.services.emotion_service import detect_emotion 
 from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
 from backend.services.ai_response_generator import process_user_input_for_ai_response
+<<<<<<< Updated upstream
+from backend.ml_model import get_event_emotion
+from backend.neo4j_driver import Neo4jDriver
+from transformers import pipeline
+>>>>>>>> Stashed changes:server.py
+=======
+>>>>>>> Stashed changes
 import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
+<<<<<<< Updated upstream
+from pymongo import MongoClient
+from pymongo.errors import ConnectionError
+# Removed unused import: from fastapi.encoders import jsonable_encoder   
+=======
+>>>>>>> Stashed changes
 import uuid
 from datetime import datetime, timedelta
 import hashlib
@@ -20,6 +38,10 @@ import jwt
 from passlib.context import CryptContext
 import openai
 from openai import OpenAI
+<<<<<<< Updated upstream
+from bson import ObjectId
+=======
+>>>>>>> Stashed changes
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -28,8 +50,128 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+<<<<<<< Updated upstream
+customers_collection = db.get_collection('customers')
+interactions_collection = db.get_collection('interactions')
+support_tickets_collection = db.get_collection('support_tickets')
+music_collection_name = db['music']
+
+<<<<<<<< Updated upstream:backend/server.py
+========
+#Hugging Face Transformers - Sentiment Analysis
+#sentiment_pipeline = pipeline("sentiment-analysis")
+
+# Create a router with the /api prefix
+api_router = APIRouter(prefix="/api")
+
+# Connect MongoDB and Hugging Face Transformers on startup
+
+@api_router.on_event("startup")
+async def connect_to_mongodb_and_load_models():
+    global client, db, customers_collection, interactions_collection, support_tickets_collection, music_collection_name, sentiment_pipeline
+    try:
+        customers_collection = db.get_collection('customers')
+        interactions_collection = db.get_collection('interactions')
+        support_tickets_collection = db.get_collection('support_tickets')
+        client = AsyncIOMotorClient(mongo_url)
+        await client.admin.command('ping')
+        print("MongoDB connection successful")
+        db = client[os.environ['DB_NAME']]
+        music_collection_name = db['music']
+        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}, collection: {music_collection_name}")
+    except Exception as e:
+        print(f"Error connecting to MongoDB: {e}")
+        client = None
+       
+    except Exception as e:
+        print(f"Error connecting to MongoDB or loading models: {e}")
+        client = None
+
+    try:
+       sentiment_pipeline = pipeline("sentiment-analysis", model = 'distilbert-base-uncased-finetuned-sst-2-english')
+       print("Sentiment analysis model loaded successfully")
+    except Exception as e:
+        print(f"Error loading sentiment analysis model: {e}")
+        sentiment_pipeline = None # if loading fails
+
+# Close MongoDB connection on shutdown
+@api_router.on_event("shutdown")
+async def close_mongodb_connection():
+    if client:
+        await client.close()
+        print("MongoDB connection closed")
+
+# Helper function for Hugging Face to custom mood mapping
+def map_sentiment_to_mood(sentiment_label: str) -> str:
+    """
+    Map sentiment labels from Hugging Face to custom mood categories.
+    """
+    if sentiment_label == "POSITIVE":
+        return "happy"
+    elif sentiment_label == "NEGATIVE":
+        return "sad"
+    else:
+        return "neutral"
+
+def map_sentiment_to_mood(sentiment_label: str) -> str:
+    """
+    Map sentiment labels from Hugging Face to custom mood categories.
+    """
+    if sentiment_label == "POSITIVE":
+        return "happy"
+    elif sentiment_label == "NEGATIVE":
+        return "sad"
+    elif sentiment_label == "NEUTRAL":
+        return "calm"
+    return "neutral"
+
+def get_music_suggestions_by_mood(mood: str) -> List[Dict[str, Any]]:
+    """
+    Get music suggestions based on the user's mood.
+    """
+    suggestions = {
+       "happy": [
+           {"title": "Upbeat Jam", "artist": "Joyful Memories","genre": "pop"},
+           {"title": "Sunshine Vibes", "artist": "The Optimists", "genre": "Indie rock"}
+       ],
+       "sad": [
+           {"title": "Melancholy Echoes", "artist": "Solemn Strings", "genre": "Blues"},
+           {"title": "Rainy Day Blues", "artist": "Lonely Crooner", "genre": "Classical"}
+       ],
+       "calm": [
+           {"title": "Forest Whisper", "artist": "Natural Sounds", "genre": "Ambient"},
+           {"title": "Ocean Breeze", "artist": "Ambient Sounds", "genre": "Lo-fi"}
+       ],
+       "neutral": [
+           {"title": "Chill Background", "artist": "Lo-Fi Beats", "genre": "Lo-fi"},
+           {"title": "Focus Flow", "artist": "Study Tunes", "genre": "Instrumental"}
+       ]
+    }
+
+    return suggestions.get(mood.lower(), suggestions["neutral"])
+
+# Helper Function for MongoDB
+
+class PyObjectId(ObjectId):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls,v):
+        if not ObjectId.is_valid(v):
+            raise ValueError("Invalid ObjectId")
+        return ObjectId(v)
+
+    @classmethod
+    def __modify_schema__(cls, field_schema: dict):
+        field_schema.update(type="string", pattern="^[a-f0-9]{24}$")
+
+>>>>>>>> Stashed changes:server.py
+=======
 
 
+>>>>>>> Stashed changes
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 ALGORITHM = "HS256"
@@ -244,6 +386,11 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+<<<<<<< Updated upstream
+<<<<<<<< Updated upstream:backend/server.py
+========
+=======
+>>>>>>> Stashed changes
 class UserInput(BaseModel):
     user_id: str
     conversation_id: str
@@ -312,9 +459,349 @@ class ButtonClickLog(BaseModel):
   button_name: str
   action_description: Optional[str]
 
+<<<<<<< Updated upstream
+  # Customer Model
+class Customer(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    phone: Optional[str] = None
+    address: Optional[str] = None
+    company: Optional[str] = None
+    time_zone: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)   
+
+# Interaction Model
+
+class Interaction(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    customer_id: str
+    interaction_type: str  # e.g., 'email', 'call', 'chat'
+    interaction_date: str
+    summary: str
+    sentiment: Optional[str] = None # e.g., 'positive', 'negative', 'neutral' (Hugging Face)
+    sentiment_score: Optional[float] = None  # Confidence Score from Hugging Face
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+# Ticket Model
+
+class SupportTicket(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    customer_id: str
+    subject: str
+    description: str
+    status: str = Field(default="open", description="The current status of the ticket")  # open, in_progress, resolved, closed
+    priority: str = Field(default="medium", description="The priority level of the ticket")  # low, medium, high, urgent
+    assigned_to: Optional[str] = None  # User ID of the support agent assigned to the ticket
+    resolution: Optional[str] = None  # Notes on how the ticket was resolved
+    sentiment: Optional[str] = None # e.g., 'positive', 'negative', 'neutral' (Hugging Face)
+    sentiment_score: Optional[float] = None  # Confidence Score from Hugging Face
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+
+    # Journal Space
+
+    # Music suggestions models - Journey space
+
+class MusicSuggestionRequest(BaseModel):
+    mood: Optional[str] = None
+    text: Optional[str] = None
+
+class MusicItem(BaseModel):
+    title: str
+    artist: str
+    genre: str
+
+class MusicPreference(BaseModel):
+    user_id : str
+    preferred_mood: str
+    timestamp: str
+    suggested_tracks: List[MusicItem]
+
+    # configurations for Customer Model
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda dt: dt.isoformat() + "z",
+            ObjectId: str
+        }
+        schema_extra = {
+            "example": {
+                "name": "Claire",
+                "email": "claire@example.com",
+                "phone": "+1234567890",
+                "address": "123 Main St, Sacramento CA, USA",
+                "company": "Wellness Centre",
+            }    
+        }
+
+
+    # Configurations for Interaction Model
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda dt: dt.isoformat() + "z",
+            ObjectId: str
+        }
+        schema_extra = {
+            "example": {
+                "customer_id": "12345",
+                "interaction_type": "email",
+                "interaction_date": "2023-10-01T12:00:00Z",
+                "summary": "Customer inquired about subscription plans.",
+                "sentiment": "positive",
+                "sentiment_score": 0.95
+            }    
+        }
+
+         # Configurations for Support Ticket Model
+    class Config:
+        allow_population_by_field_name = True
+        arbitrary_types_allowed = True
+        json_encoders = {
+            datetime: lambda dt: dt.isoformat() + "z",
+            ObjectId: str
+        }
+        schema_extra = {
+            "example": {
+                "customer_id": "12345",
+                "subject": "Issue with subscription",
+                "description": "Customer reported an issue with their subscription renewal.",
+                "status": "open",
+                "priority": "high",
+                "assigned_to": "admin",
+                "resolution": None,
+                "sentiment": "negative",
+                "sentiment_score": 0.85
+            }
+        }
+
+
+# FastAPI endpoints - Customer Support
+
+@api_router.post("/customers/", response_model=Customer, summary="Create a new customer")
+async def create_customer(customer: Customer):
+    """Creates a new customer in the system."""
+    customer_data = customer.model_dump(by_alias=True)
+    result = await customers_collection.insert_one(customer_data)
+    new_customer = await customers_collection.find_one({"_id": result.inserted_id})
+    return Customer(**new_customer)
+
+@api_router.get("/customers/", response_model=List[Customer], summary="Retrieve all customers")
+async def get_customers():
+    """Retrieves all customers from the system."""
+    customers =[]
+    async for customer in customers_collection.find():
+        customers.append(Customer(**customer))
+    return customers
+
+@api_router.get("/customers/{customer_id}", response_model=Customer, summary="Retrieve a customer by ID")
+async def get_customer(customer_id: str):
+    """Retrieves a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer = await customers_collection.find_one({"_id": ObjectId(customer_id)})
+    if customer:
+        return Customer(**customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+
+@app.put("/customers/{customer_id}", response_model=Customer, summary="Update a customer")
+async def update_customer(customer_id: str, customer: Customer):
+    """Updates an existing customer in the system."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    update_data = customer.model_dump(exclude_unset=True, by_alias=True)
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields to update")
+    
+    update_result = await customers_collection.update_one({"_id": ObjectId(customer_id)}, {"$set": update_data})
+
+    if update_result.modified_count == 1:
+        updated_customer = await customers_collection.find_one({"_id": ObjectId(customer_id)})
+        return Customer(**updated_customer)
+    raise HTTPException(status_code=404, detail="Customer not found or no changes made")
+    
+
+@api_router.delete("/customers/{customer_id}", summary="Delete a customer")
+async def delete_customer(customer_id: str):
+    """Deletes a customer by id from the system."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    delete_result = await customers_collection.delete_one({"_id": ObjectId(customer_id)})
+    if delete_result.deleted_count == 1:
+        # Delete associated interactions and support tickets
+        await interactions_collection.delete_many({"customer_id": customer_id})
+        await support_tickets_collection.delete_many({"customer_id": customer_id})
+        return {"message": "Customer deleted successfully"}
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+# FastAPI endpoints - Interaction
+
+@api_router.post("/interactions/", response_model=Interaction, summary="Create a new interaction")
+async def create_interaction(interaction: Interaction):
+    """Creates a new interaction for a customer including sentimental analysis."""
+    if not ObjectId.is_valid(interaction.customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer_exists = await customers_collection.find_one({"_id": ObjectId(interaction.customer_id)})
+    if not customer_exists:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    return interaction
+
+@api_router.get("/interactions/", response_model=List[Interaction], summary="Retrieve all interactions")
+async def get_interactions():
+    """Retrieves all interactions from the system."""
+    return get_interactions()
+
+@api_router.get("/interactions/{interaction_id}", response_model=Interaction, summary="Retrieve an interaction by ID")
+async def get_interaction(interaction_id: str):
+    """Retrieves an interaction by its ID."""
+    interaction = get_interaction(interaction_id)
+    if not interaction:
+        raise HTTPException(status_code=404, detail="Interaction not found")
+    """Perform sentiment analysis on the interaction summary"""
+    sentimental_result = sentiment_pipeline(interaction.summary)[0]
+    interaction["sentiment"] = sentimental_result['label']
+    interaction["sentiment_score"] = sentimental_result['score']
+    interaction_data = interaction.dict(by_alias=True, exclude_none=True)
+    result = await interactions_collection.insert_one(interaction_data)
+    new_interaction = await interactions_collection.find_one({"_id": result.inserted_id})
+    return interaction(**new_interaction)
+
+@app.put("/interactions/{interaction_id}", response_model=Interaction, summary="Update an interaction")
+async def update_interaction(interaction_id: str, interaction: Interaction):
+    """Updates an existing interaction by id."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    update_data = interaction.dict(exclude_unset=True, by_alias=True)
+    update_data.pop("id", None)  # Remove id from update data
+    update_data.pop("Sentiment", None)  # Remove Sentiment from update data
+    update_data.pop("Sentiment_score", None)  # Remove Sentiment_score from update data
+
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields to update")
+
+    update_result = await interactions_collection.update_one({"_id": ObjectId(interaction_id)}, {"$set": update_data})
+
+    if update_result.modified_count == 1:
+        updated_interaction = await interactions_collection.find_one({"_id": ObjectId(interaction_id)})
+        return Interaction(**updated_interaction)
+    raise HTTPException(status_code=404, detail="Interaction not found or no changes made")
+
+@api_router.delete("/interactions/{interaction_id}", summary="Delete an interaction")
+async def delete_interaction(interaction_id: str):
+    """Deletes an interaction from the system."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+
+    delete_result = await interactions_collection.delete_one({"_id": ObjectId(interaction_id)})
+
+    if delete_result.deleted_count == 1:
+        return {"message": "Interaction deleted successfully"}
+    raise HTTPException(status_code=404, detail="Interaction not found")
+
+# FastAPI endpoints - Support Ticket
+
+@api_router.post("/support-tickets/", response_model=SupportTicket, summary="Create a new support ticket")
+async def create_support_ticket(ticket: SupportTicket):
+    """Creates a new support ticket in the system."""
+    if not ObjectId.is_valid(ticket.customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer_exists = await customers_collection.find_one({"_id": ObjectId(ticket.customer_id)})
+    if not customer_exists:
+        raise HTTPException(status_code=404, detail="Customer not found")
+    
+    # Perform sentiment analysis on the ticket description
+    sentimental_result = sentiment_pipeline(ticket.description)[0]
+    ticket.sentiment = sentimental_result['label']
+    ticket.sentiment_score = sentimental_result['score']
+
+    ticket_data = ticket.dict(by_alias=True, exclude_none=True)
+    ticket_data['created at'] = datetime.now().isoformat()
+    ticket_data['updated at'] = datetime.now().isoformat()
+
+    result = await support_tickets_collection.insert_one(ticket_data)
+    new_ticket = await support_tickets_collection.find_one({"_id": result.inserted_id})
+    return SupportTicket(**new_ticket)
+
+@api_router.get("/tickets/", response_model=List[SupportTicket], summary="Retrieve all support tickets")
+async def get_support_tickets(customer_id: Optional[str] = None, status: Optional[str] = None):
+    """Retrieves all support tickets from the system."""
+    query = {}
+    if customer_id:
+        if not ObjectId.is_valid(customer_id):
+            raise HTTPException(status_code=400, detail="Invalid customer ID format")
+        query["customer_id"] = customer_id
+    if status:
+        query["status"] = status
+
+        tickets = []
+        async for ticket in support_tickets_collection.find(query):
+            tickets.append(SupportTicket(**ticket))
+    return tickets
+
+@api_router.get("/tickets/{ticket_id}", response_model=SupportTicket, summary="Retrieve a support ticket by ID")
+async def get_support_ticket(ticket_id: str):
+    """Retrieves a specific support ticket from the system."""
+    if not ObjectId.is_valid(ticket_id):
+        raise HTTPException(status_code=400, detail="Invalid ticket ID format")
+
+    ticket = await support_tickets_collection.find_one({"_id": ObjectId(ticket_id)})
+    if ticket:
+        return SupportTicket(**ticket)
+    raise HTTPException(status_code=404, detail="Support ticket not found")
+
+@api_router.put("/tickets/{ticket_id}", response_model=SupportTicket, summary="Update a support ticket")
+async def update_support_ticket(ticket_id: str, ticket: SupportTicket):
+    """Updates an existing support ticket by id."""
+    if not ObjectId.is_valid(ticket_id):
+        raise HTTPException(status_code=400, detail="Invalid ticket ID format")
+    
+    update_data = ticket.dict(exclude_unset=True, by_alias=True)
+    update_data.pop("id", None)  # Remove id from update data
+    update_data["updated_at"] = datetime.now().isoformat()  # Update timestamp
+    
+    # Re-analyze sentiment if description is updated
+
+    if "description" in update_data:
+        sentimental_result = sentiment_pipeline(update_data["description"])[0]
+        update_data["sentiment"] = sentimental_result['label']
+        update_data["sentiment_score"] = sentimental_result['score']
+
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields to update")
+
+    update_result = await support_tickets_collection.update_one({"_id": ObjectId(ticket_id)}, {"$set": update_data})
+
+    if update_result.modified_count == 1:
+        updated_ticket = await support_tickets_collection.find_one({"_id": ObjectId(ticket_id)})
+        return SupportTicket(**updated_ticket)
+    raise HTTPException(status_code=404, detail="Support ticket not found or no changes made")    
+
+@api_router.delete("/tickets/{ticket_id}", summary="Delete a support ticket")
+async def delete_support_ticket(ticket_id: str):
+    """Deletes a support ticket from the system."""
+    if not ObjectId.is_valid(ticket_id):
+        raise HTTPException(status_code=400, detail="Invalid ticket ID format")
+
+    delete_result = await support_tickets_collection.delete_one({"_id": ObjectId(ticket_id)})
+    if delete_result.deleted_count == 1:
+        return {"detail": "Support ticket deleted successfully"}
+    raise HTTPException(status_code=404, detail="Support ticket not found")
+
+@app.get("/")
+async def root():
+    """Root endpoint to check if the API is running."""
+    return {"message": "Welcome to the CRM Support API! Use /api/docs for documentation."}    
+=======
 
 
 
+>>>>>>> Stashed changes
 
 # FastAPI endpoints - Emolytics
 
@@ -364,7 +851,11 @@ async def get_logs():
     """Retrieves all stored interaction logs from MongoDB."""
     logs = log_service.get_all_log_entries()
     if not logs:
+<<<<<<< Updated upstream
+        raise HTTPException(status_code=404, detail="No logs found.")
+=======
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No logs found.")
+>>>>>>> Stashed changes
     return logs
 
 # You might want to add a health check endpoint
@@ -402,9 +893,75 @@ async def get_chat_history(conversation_id: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An error occurred: {str(e)}"
         )
+<<<<<<< Updated upstream
+
+ # FastAPI endpoints - Music suggestions
+
+@api_router.post("/music/suggest", response_model=MusicPreference, summary="Get music suggestions based on mood or text")
+async def suggest_music(request: MusicSuggestionRequest):
+    """
+    Suggests music tracks based on the user's mood or text input.
+    """
+    if not client:
+        raise HTTPException(status_code=503, detail="Music service is not available")
+    detected_mood = request.mood
+    if request.text:
+        if not sentiment_pipeline:
+            raise HTTPException(status_code=503, detail="Sentiment analysis service is not available")
+        try:
+            # Use the hugging face model
+            sentiment = sentiment_pipeline(request.text)[0]
+            sentiment_label = sentiment['label']
+            detected_mood = map_sentiment_to_mood(sentiment_label)
+            print(f"Text: '{request.text}', Detected sentiment: {sentiment_label}, Detected Mood: {detected_mood}")
+        except Exception as e:
+            print(f"Error analyzing sentiment: {e}")
+            raise HTTPException(status_code=500, detail=f"Error analyzing sentiment: {e}")
+    elif not detected_mood:
+        raise HTTPException(status_code=400, detail="Mood or text input is required for music suggestions")  
+    # Get music suggestions based on the detected mood 
+    suggestions = get_music_suggestions_by_mood(detected_mood)
+
+    # Here you would implement the logic to suggest music tracks based on the detected mood
+    # For now, let's return the received request as a placeholder
+    return {"mood": detected_mood, "suggested_tracks": suggestions}
+
+@api_router.post("/music/preference", response_model=MusicPreference, summary="Save user's music preferences")
+async def save_music_preference(preference: MusicPreference):
+    """
+    Saves the user's music preferences.
+    """
+    if not client:
+        raise HTTPException(status_code=503, detail="Music service is not available")
+    try:
+        result = await music_collection_name.insert_one(preference.model_dump(exclude_none=True, by_alias=True))
+        return {"message": "Preference saved successfully", "preference_id": str(result.inserted_id)}
+    except Exception as e:
+        print(f"Error saving music preference: {e}")
+        raise HTTPException(status_code=500, detail=f"Error saving music preference: {e}")
+
+@api_router.get("/music/preferences/{user_id}", response_model=List[MusicPreference], summary="Get user's music preferences")
+async def get_music_preferences(user_id: str):
+    """
+    Retrieves the user's music preferences.
+    """
+    if not client:
+        raise HTTPException(status_code=503, detail="Music service is not available")
+    try:
+        preferences = []
+        async for doc in music_collection_name.find({"user_id": user_id}):
+            doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
+            preferences.append(doc)
+        return {"user_id": user_id, "preferences": preferences}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error retrieving music preferences: {e}")
+
+>>>>>>>> Stashed changes:server.py
+=======
     
     
 
+>>>>>>> Stashed changes
 # Utility functions
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
@@ -678,6 +1235,8 @@ async def initialize_personality_questions():
         ]
         await db.personality_questions.insert_many(questions)
 
+<<<<<<< Updated upstream
+=======
 # Psychology Multiple Choice Questions
 async def psychology_multiple_choice_questions():
     psychology_questions = await db.multiple_choice_questions.count_documents({})
@@ -1054,6 +1613,7 @@ async def learning_experience_questionaire():
         await db.learning_experience_questionaire.insert_many(questions)
 
 
+>>>>>>> Stashed changes
 async def initialize_sample_stories():
     existing_stories = await db.stories.count_documents({})
     if existing_stories == 0:
