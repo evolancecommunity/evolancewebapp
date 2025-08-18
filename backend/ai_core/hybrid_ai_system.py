@@ -267,7 +267,7 @@ class HybridAISystem:
     async def _generate_gemini_response(self, message: str, emotion: str, intent: str, context: Dict = None) -> str:
         """Generate response using Gemini"""
         try:
-            model = genai.GenerativeModel('gemini-pro')
+            model = genai.GenerativeModel('gemini-2.5-pro')
             
             prompt = f"""You are an emotionally intelligent AI assistant. 
             The user's message shows {emotion} emotion and {intent} intent.

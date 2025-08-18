@@ -15,9 +15,12 @@ import jwt
 from passlib.context import CryptContext
 import openai
 from openai import OpenAI
+import math
 
 # Import hybrid AI integration
 from ai_core.hybrid_ai_integration import evolance_ai
+from ai_core.gemini_integration import GeminiEmotionAnalyzer, GeminiCoreAI
+from ai_core.progressive_learning import ProgressiveLearningSystem
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -25,6 +28,8 @@ load_dotenv(ROOT_DIR / '.env')
 # MongoDB connection with fallback defaults
 mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
 db_name = os.environ.get('DB_NAME', 'evolance_db')
+
+# Initialize MongoDB client (connection will be tested in startup)
 client = AsyncIOMotorClient(mongo_url)
 db = client[db_name]
 
@@ -39,6 +44,9 @@ if OPENAI_API_KEY and OPENAI_API_KEY != 'your-openai-api-key-here':
     openai_client = OpenAI(api_key=OPENAI_API_KEY)
 else:
     openai_client = None
+
+# Initialize Progressive Learning System
+progressive_learning = ProgressiveLearningSystem()
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer()
@@ -406,8 +414,8 @@ Keep insights spiritual, profound but accessible, and encouraging."""
             
             insights_text = response.choices[0].message.content
             if insights_text:
-            insights = [insight.strip() for insight in insights_text.split('\n') if insight.strip() and not insight.strip().startswith('#')]
-            return insights[:4]  # Max 4 insights
+                insights = [insight.strip() for insight in insights_text.split('\n') if insight.strip() and not insight.strip().startswith('#')]
+                return insights[:4]  # Max 4 insights
             
         except Exception as e:
             logger.error(f"OpenAI API error for insights: {e}")
@@ -631,6 +639,17 @@ async def initialize_sample_videos():
         ]
         await db.video_lessons.insert_many(videos)
 
+# Initialize AI systems
+hybrid_ai = evolance_ai
+
+# Initialize Gemini AI
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "your-gemini-api-key-here")
+gemini_emotion_analyzer = GeminiEmotionAnalyzer(GEMINI_API_KEY)
+gemini_core_ai = GeminiCoreAI(GEMINI_API_KEY)
+
+# Store conversation contexts per user
+user_conversations = {}
+
 # Authentication Routes
 @api_router.post("/auth/register", response_model=Token)
 async def register(user: UserCreate):
@@ -811,7 +830,7 @@ async def send_chat_message(
     
     # Use hybrid AI system for enhanced response
     try:
-        ai_result = await evolance_ai.process_chat_message(
+        ai_result = await hybrid_ai.process_chat_message(
             user_id=current_user.id,
             message=message,
             context=user_context
@@ -1136,7 +1155,7 @@ async def hybrid_ai_chat(
 ):
     """Enhanced chat endpoint using hybrid AI system"""
     try:
-        result = await evolance_ai.process_chat_message(
+        result = await hybrid_ai.process_chat_message(
             user_id=current_user.id,
             message=message,
             context=context
@@ -1150,7 +1169,7 @@ async def hybrid_ai_chat(
 async def get_emotional_profile(current_user: User = Depends(get_current_user)):
     """Get user's emotional profile and graphs"""
     try:
-        profile = await evolance_ai.get_emotional_profile(current_user.id)
+        profile = await hybrid_ai.get_emotional_profile(current_user.id)
         return EmotionalProfile(**profile)
     except Exception as e:
         logger.error(f"Error getting emotional profile: {e}")
@@ -1160,7 +1179,7 @@ async def get_emotional_profile(current_user: User = Depends(get_current_user)):
 async def get_avatar_state(current_user: User = Depends(get_current_user)):
     """Get avatar visualization state"""
     try:
-        avatar_state = await evolance_ai.get_avatar_state(current_user.id)
+        avatar_state = await hybrid_ai.get_avatar_state(current_user.id)
         return AvatarState(**avatar_state)
     except Exception as e:
         logger.error(f"Error getting avatar state: {e}")
@@ -1302,7 +1321,7 @@ async def get_consciousness_journey(current_user: User = Depends(get_current_use
 async def get_ai_checkin(current_user: User = Depends(get_current_user)):
     """Get AI friend check-in message"""
     try:
-        checkin = await evolance_ai.generate_checkin_message(current_user.id)
+        checkin = await hybrid_ai.generate_checkin_message(current_user.id)
         return CheckInMessage(**checkin)
     except Exception as e:
         logger.error(f"Error generating checkin: {e}")
@@ -1312,7 +1331,7 @@ async def get_ai_checkin(current_user: User = Depends(get_current_user)):
 async def get_memory_reminder(current_user: User = Depends(get_current_user)):
     """Get memory/milestone reminder"""
     try:
-        reminder = await evolance_ai.generate_memory_reminder(current_user.id)
+        reminder = await hybrid_ai.generate_memory_reminder(current_user.id)
         return MemoryReminder(**reminder) if reminder else None
     except Exception as e:
         logger.error(f"Error generating reminder: {e}")
@@ -1322,7 +1341,7 @@ async def get_memory_reminder(current_user: User = Depends(get_current_user)):
 async def get_crisis_resources():
     """Get crisis resources and helpline information"""
     try:
-        resources = evolance_ai._get_crisis_resources()
+        resources = hybrid_ai._get_crisis_resources()
         return CrisisResources(**resources)
     except Exception as e:
         logger.error(f"Error getting crisis resources: {e}")
@@ -1358,24 +1377,158 @@ class EmotionTimePoint(BaseModel):
 class EmotionTimeSeriesResponse(BaseModel):
     emotions: Dict[str, List[EmotionTimePoint]]
 
+class ChatRequest(BaseModel):
+    message: str
+    user_id: Optional[str] = None
+
 @api_router.get("/ai/emotional-state/timeseries", response_model=EmotionTimeSeriesResponse)
 async def get_emotional_state_timeseries(current_user: User = Depends(get_current_user)):
-    """Get time-series data for each emotion (mock data for Emolytics charts)"""
-    import datetime
-    import random
-    base_time = datetime.datetime.utcnow()
-    emotions = ["joy", "sadness", "anger", "fear", "surprise", "disgust", "trust", "anticipation"]
-    data = {}
-    for emotion in emotions:
-        series = []
-        for i in range(14):  # 14 days
-            point = EmotionTimePoint(
-                timestamp=(base_time - datetime.timedelta(days=13-i)).isoformat(),
-                value=max(0, min(100, random.gauss(50, 20)))
+    """Get emotional state time series data for visualization"""
+    try:
+        # Generate sample time series data for the last 7 days
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=7)
+        
+        emotions = {
+            "joy": [],
+            "sadness": [],
+            "anger": [],
+            "fear": [],
+            "surprise": [],
+            "disgust": [],
+            "trust": [],
+            "anticipation": []
+        }
+        
+        # Generate data points for each emotion
+        for emotion in emotions.keys():
+            for i in range(8):  # 8 data points over 7 days
+                timestamp = start_date + timedelta(days=i)
+                # Generate realistic emotion values based on time of day and day of week
+                base_value = 30 + (hash(f"{current_user.id}_{emotion}") % 40)  # User-specific base
+                time_factor = 10 * math.sin(i * math.pi / 4)  # Daily variation
+                day_factor = 5 * math.sin(i * math.pi / 7)    # Weekly variation
+                value = max(0, min(100, base_value + time_factor + day_factor))
+                
+                emotions[emotion].append(EmotionTimePoint(
+                    timestamp=timestamp.isoformat(),
+                    value=round(value, 1)
+                ))
+        
+        return EmotionTimeSeriesResponse(emotions=emotions)
+        
+    except Exception as e:
+        logger.error(f"Error generating emotional time series: {e}")
+        raise HTTPException(status_code=500, detail="Failed to generate emotional time series")
+
+@api_router.post("/ai/gemini-chat")
+async def gemini_chat_with_ai(request: ChatRequest, current_user: User = Depends(get_current_user)):
+    """Enhanced chat endpoint using Gemini for emotion analysis and response generation with progressive learning."""
+    try:
+        user_id = current_user.id
+        user_message = request.message
+        
+        # Get user's conversation context
+        if user_id not in user_conversations:
+            user_conversations[user_id] = []
+        
+        conversation_context = user_conversations[user_id]
+        
+        # Check if we should use our own trained model
+        use_own_model = progressive_learning.should_use_own_model()
+        
+        if use_own_model:
+            # Use our trained model
+            emotion_data = progressive_learning.predict_emotion(user_message)
+            ai_response = progressive_learning.generate_response(user_message, emotion_data)
+            updated_emolytics = progressive_learning.analyze_emolytics(emotion_data, conversation_context)
+            model_used = "trained"
+        else:
+            # Use Gemini for analysis and response
+            emotion_data = gemini_emotion_analyzer.analyze_conversation_emotion(
+                user_message, conversation_context
             )
-            series.append(point)
-        data[emotion] = series
-    return EmotionTimeSeriesResponse(emotions=data)
+            ai_response = gemini_emotion_analyzer.generate_emotional_response(
+                user_message, emotion_data
+            )
+            updated_emolytics = gemini_core_ai.update_emolytics(
+                user_id, emotion_data, conversation_context
+            )
+            model_used = "gemini"
+            
+            # Collect training data from Gemini interaction
+            progressive_learning.collect_training_data(
+                user_message, emotion_data, ai_response, updated_emolytics
+            )
+        
+        # Update conversation context
+        conversation_entry = {
+            "user_message": user_message,
+            "ai_response": ai_response,
+            "emotion_data": emotion_data,
+            "timestamp": datetime.now().isoformat()
+        }
+        conversation_context.append(conversation_entry)
+        
+        # Keep only last 20 conversations for context
+        if len(conversation_context) > 20:
+            conversation_context = conversation_context[-20:]
+        
+        user_conversations[user_id] = conversation_context
+        
+        # Get learning status
+        learning_status = progressive_learning.get_learning_status()
+        
+        return {
+            "response": ai_response,
+            "emotion_analysis": emotion_data,
+            "emolytics_update": updated_emolytics,
+            "conversation_id": len(conversation_context),
+            "model_used": model_used,
+            "learning_status": learning_status
+        }
+        
+    except Exception as e:
+        logger.error(f"Error in Gemini chat endpoint: {e}")
+        return {"error": "Failed to process chat request"}
+
+@api_router.get("/ai/emotional-patterns/{user_id}")
+async def get_emotional_patterns(user_id: str, current_user: User = Depends(get_current_user)):
+    """Get emotional patterns analysis for a user."""
+    try:
+        patterns = gemini_emotion_analyzer.analyze_emotional_patterns(user_id)
+        return {"patterns": patterns}
+    except Exception as e:
+        logger.error(f"Error analyzing patterns: {e}")
+        return {"error": "Failed to analyze emotional patterns"}
+
+@api_router.get("/ai/learning-status")
+async def get_learning_status(current_user: User = Depends(get_current_user)):
+    """Get the current status of the progressive learning system."""
+    try:
+        status = progressive_learning.get_learning_status()
+        return {
+            "learning_status": status,
+            "independence_achieved": progressive_learning.should_use_own_model(),
+            "next_training_at": status["total_interactions"] + status.get("training_frequency", 100)
+        }
+    except Exception as e:
+        logger.error(f"Error getting learning status: {e}")
+        return {"error": "Failed to get learning status"}
+
+@api_router.post("/ai/train-models")
+async def train_models_manually(current_user: User = Depends(get_current_user)):
+    """Manually trigger model training."""
+    try:
+        results = progressive_learning.train_models()
+        return {
+            "message": "Model training completed",
+            "results": results,
+            "new_status": progressive_learning.get_learning_status()
+        }
+    except Exception as e:
+        logger.error(f"Error training models: {e}")
+        return {"error": "Failed to train models"}
 
 @api_router.post("/test/complete-personality")
 async def complete_personality_test_for_testing(current_user: User = Depends(get_current_user)):
@@ -1406,9 +1559,35 @@ logger = logging.getLogger(__name__)
 
 @app.on_event("startup")
 async def startup_event():
-    await initialize_personality_questions()
-    await initialize_sample_stories()
-    await initialize_sample_videos()
+    global client, db
+    
+    # Test MongoDB connection
+    try:
+        await client.admin.command('ping')
+        logger.info(f"✅ MongoDB connected successfully to: {mongo_url}")
+    except Exception as e:
+        logger.error(f"❌ MongoDB Atlas connection failed: {e}")
+        logger.info("🔄 Attempting to use local MongoDB...")
+        
+        # Try to reconnect to local MongoDB
+        try:
+            client.close()
+            client = AsyncIOMotorClient('mongodb://localhost:27017')
+            db = client[db_name]
+            await client.admin.command('ping')
+            logger.info("✅ Connected to local MongoDB successfully")
+        except Exception as local_error:
+            logger.error(f"❌ Local MongoDB also failed: {local_error}")
+            logger.warning("⚠️ Starting without database - some features may not work")
+            # Continue without database for now
+    
+    try:
+        await initialize_personality_questions()
+        await initialize_sample_stories()
+        await initialize_sample_videos()
+    except Exception as e:
+        logger.error(f"❌ Failed to initialize data: {e}")
+    
     logger.info("TimeSoul API started successfully")
     if openai_client:
         logger.info("OpenAI integration enabled")
