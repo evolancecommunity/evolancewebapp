@@ -60,7 +60,11 @@ const SplashScreen = ({ onComplete }) => {
 
         {/* Tagline */}
         <p className="text-xl md:text-2xl text-purple-200 text-center max-w-md slide-up opacity-90">
+<<<<<<< HEAD
+          Transform your soul, embrace your journey
+=======
           Welcome! Your emotional wellness journey starts now.
+>>>>>>> neel
         </p>
 
         {/* Spiritual Elements */}

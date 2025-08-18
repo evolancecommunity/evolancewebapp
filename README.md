@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+# Here are your Instructions
+=======
 # Evolance - Emotional Wellness AI App
 
 ## What is Evolance?
@@ -159,3 +162,4 @@ Evolance is an emotional wellness app that uses AI to help you understand and im
 ---
 
 *Evolance: Your AI-powered companion for emotional awareness and expression without judgment.*
+>>>>>>> neel
