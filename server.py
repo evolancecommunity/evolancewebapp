@@ -3,34 +3,27 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:backend/server.py
-========
-=======
->>>>>>> Stashed changes
+
 from backend.services.emotion_service import detect_emotion 
 from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
 from backend.services.ai_response_generator import process_user_input_for_ai_response
-<<<<<<< Updated upstream
+
 from backend.ml_model import get_event_emotion
 from backend.neo4j_driver import Neo4jDriver
 from transformers import pipeline
->>>>>>>> Stashed changes:server.py
-=======
->>>>>>> Stashed changes
+
 import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
-<<<<<<< Updated upstream
+
 from pymongo import MongoClient
 from pymongo.errors import ConnectionError
 # Removed unused import: from fastapi.encoders import jsonable_encoder   
-=======
->>>>>>> Stashed changes
+
 import uuid
 from datetime import datetime, timedelta
 import hashlib
@@ -38,10 +31,9 @@ import jwt
 from passlib.context import CryptContext
 import openai
 from openai import OpenAI
-<<<<<<< Updated upstream
+
 from bson import ObjectId
-=======
->>>>>>> Stashed changes
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -50,14 +42,14 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
-<<<<<<< Updated upstream
+
 customers_collection = db.get_collection('customers')
 interactions_collection = db.get_collection('interactions')
 support_tickets_collection = db.get_collection('support_tickets')
 music_collection_name = db['music']
+journal_collection_name = db['journal']
 
-<<<<<<<< Updated upstream:backend/server.py
-========
+
 #Hugging Face Transformers - Sentiment Analysis
 #sentiment_pipeline = pipeline("sentiment-analysis")
 
@@ -68,7 +60,7 @@ api_router = APIRouter(prefix="/api")
 
 @api_router.on_event("startup")
 async def connect_to_mongodb_and_load_models():
-    global client, db, customers_collection, interactions_collection, support_tickets_collection, music_collection_name, sentiment_pipeline
+    global client, db, customers_collection, interactions_collection, support_tickets_collection, music_collection_name, sentiment_pipeline, journal_collection_name
     try:
         customers_collection = db.get_collection('customers')
         interactions_collection = db.get_collection('interactions')
@@ -78,7 +70,8 @@ async def connect_to_mongodb_and_load_models():
         print("MongoDB connection successful")
         db = client[os.environ['DB_NAME']]
         music_collection_name = db['music']
-        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}, collection: {music_collection_name}")
+        journal_collection_name = db['journal']
+        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}, collection: {music_collection_name},{journal_collection_name}")
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
         client = None
@@ -167,11 +160,7 @@ class PyObjectId(ObjectId):
     def __modify_schema__(cls, field_schema: dict):
         field_schema.update(type="string", pattern="^[a-f0-9]{24}$")
 
->>>>>>>> Stashed changes:server.py
-=======
 
-
->>>>>>> Stashed changes
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
 ALGORITHM = "HS256"
@@ -386,11 +375,7 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
-<<<<<<< Updated upstream
-<<<<<<<< Updated upstream:backend/server.py
-========
-=======
->>>>>>> Stashed changes
+
 class UserInput(BaseModel):
     user_id: str
     conversation_id: str
@@ -459,7 +444,7 @@ class ButtonClickLog(BaseModel):
   button_name: str
   action_description: Optional[str]
 
-<<<<<<< Updated upstream
+
   # Customer Model
 class Customer(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -519,6 +504,17 @@ class MusicPreference(BaseModel):
     preferred_mood: str
     timestamp: str
     suggested_tracks: List[MusicItem]
+
+    
+    # Journey suggestions models - Journey space
+
+class JourneySuggestionRequest(BaseModel):
+    user_id: str
+    title: str
+    content: str
+    timestamp: str # ISO format string
+    mood: Optional[str] = None # Mood detected by A.I
+
 
     # configurations for Customer Model
     class Config:
@@ -797,11 +793,7 @@ async def delete_support_ticket(ticket_id: str):
 async def root():
     """Root endpoint to check if the API is running."""
     return {"message": "Welcome to the CRM Support API! Use /api/docs for documentation."}    
-=======
 
-
-
->>>>>>> Stashed changes
 
 # FastAPI endpoints - Emolytics
 
@@ -851,11 +843,10 @@ async def get_logs():
     """Retrieves all stored interaction logs from MongoDB."""
     logs = log_service.get_all_log_entries()
     if not logs:
-<<<<<<< Updated upstream
         raise HTTPException(status_code=404, detail="No logs found.")
-=======
+
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No logs found.")
->>>>>>> Stashed changes
+
     return logs
 
 # You might want to add a health check endpoint
@@ -893,7 +884,7 @@ async def get_chat_history(conversation_id: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An error occurred: {str(e)}"
         )
-<<<<<<< Updated upstream
+
 
  # FastAPI endpoints - Music suggestions
 
@@ -956,12 +947,7 @@ async def get_music_preferences(user_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error retrieving music preferences: {e}")
 
->>>>>>>> Stashed changes:server.py
-=======
-    
-    
 
->>>>>>> Stashed changes
 # Utility functions
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
@@ -1235,8 +1221,6 @@ async def initialize_personality_questions():
         ]
         await db.personality_questions.insert_many(questions)
 
-<<<<<<< Updated upstream
-=======
 # Psychology Multiple Choice Questions
 async def psychology_multiple_choice_questions():
     psychology_questions = await db.multiple_choice_questions.count_documents({})
@@ -1613,7 +1597,7 @@ async def learning_experience_questionaire():
         await db.learning_experience_questionaire.insert_many(questions)
 
 
->>>>>>> Stashed changes
+
 async def initialize_sample_stories():
     existing_stories = await db.stories.count_documents({})
     if existing_stories == 0:
