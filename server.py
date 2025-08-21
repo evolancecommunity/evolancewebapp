@@ -40,6 +40,8 @@ load_dotenv(ROOT_DIR / '.env')
 
 # MongoDB connection
 mongo_url = os.environ['MONGO_URL']
+mongo_db_name = os.environ['DB_NAME']
+mongo_collection_name = os.environ("COLLECTION_NAME")
 client = AsyncIOMotorClient(mongo_url)
 db = None
 music_collection = None
@@ -178,8 +180,8 @@ def analyze_text_sentiment(text: str) -> dict:
     if not sentiment_pipeline:
         raise RuntimeError("Sentiment pipeline is not loaded.")        
 
-        result = sentiment.pipeline(text)[0]
-        return {"label": result['label'], "score": round(result['score'], 4)}
+    result = sentiment_pipeline(text)[0]
+    return {"label": result['label'], "score": round(result['score'], 4)}
 
 
 # Security
@@ -1058,9 +1060,85 @@ async def get_recent_journal_entries(user_id: str):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to retrieve recent journal entries: {e}")
     
+# API endpoints for customer / evolance representation with sentimental analysis
 
+api_router.post("/analyze-interaction/", response_model = AnalyzedInteractResponse, status_code=201)
+async def analyze_and_store_interaction(interaction_data: InteractionCreate):
+    """Analyze the sentiment of customer and evolance messages and stores the interaction along with sentiment results in MongoDB """
+    if not sentiment_pipeline:
+        raise HTTPException(status_code=503, detail ="Sentiment analysis service is not available")
+    if not db:
+        raise HTTPException(status_code=503, detail="database service is not available")
+    
+    try:
+        # Amalyze customer message sentiment
+        customer_sentiment = analyze_text_sentiment(interaction_data.customer_message)
 
+        # Analyze Evolance response sentiment
+        evolance_sentiment = analyze_text_sentiment(interaction_data.evolance_response)
 
+        # Create an interaction object to store in MongoDB
+        new_interaction = Interaction(
+            customer_message=interaction_data.customer_message,
+            evolance_response=interaction_data.evolance_response,
+            customer_sentiment_label=customer_sentiment['label'],
+            customer_sentiment_score=customer_sentiment['score'],
+            evolance_sentiment_label=evolance_sentiment['label'],
+            evolance_sentimental_score=evolance_sentiment['score']
+        )
+
+        # Convert model to dictionary for MongoDB insertion
+        # Use .model_dump() 
+        interaction_dict = new_interaction.model_dump(by_alias=True)
+
+        # Insert into MongoDB
+        result = await db [mongo_collection_name].insert_one(interaction_dict)
+
+        # Prepare response model using the inserted document's ID
+        # Convert ObjectId back to string for the response_model
+        response_interaction = AnalyzedInteractResponse(
+            id=str(result.inserted_id)
+            customer_message=new_interaction.customer_message,
+            evolance_response=new_interaction.evolance_response,
+            customer_sentiment=SentimentResult(**customer_sentiment)
+            timestamp=new_interaction.timestamp
+
+        )
+        return response_interaction
+    except Exception as e:
+        print(f"Error processing request: {e}")
+        raise HTTPException(status_code=500, detail = f'Internal server error: {e}')
+
+@api_router.get('/interactions/', response_model=list[AnalyzedInteractResponse])    
+async def get_all_interactions():
+   """Retrieves all stored interactions with their sentiment analysis results""" 
+   if not db:
+       raise HTTPException(status_code=503, detail="Database service is not available")
+   
+   # Fetch all documents from the collection
+   interactions_list = []
+   try:
+       # Fetch all documents from the collection
+       docs = db[mongo_collection_name].find({})
+
+       # Iterate through the docs
+       async for doc in docs:
+           interactions_list.append(AnalyzedInteractResponse(
+               id=str(doc["_id"]),
+               customer_message=doc["customer_message"],
+               evolance_response=doc["evolance_response"],
+               customer_sentiment=SentimentResult(
+                   label=doc["evolance_sentiment_label"]
+                   score=doc["evolance_sentiment_score"]
+               ),
+               timestamp=doc["timestamp"]
+           ))
+       return interactions_list
+   except Exception as e:
+       print(f"Error retrieving interactions: {e}")   
+       raise HTTPException(status_code=500, detail=f"Error retrieving interactions: {e}")
+
+     
 
 # Utility functions
 def verify_password(plain_password: str, hashed_password: str) -> bool:
