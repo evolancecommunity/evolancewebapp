@@ -4,8 +4,12 @@ from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 from backend.services.emotion_service import detect_emotion 
+=======
+from backend.services.emotion_service import detect_emotion # resolved merge conflicts
+>>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
 =======
 from backend.services.emotion_service import detect_emotion # resolved merge conflicts
 >>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
@@ -13,6 +17,7 @@ from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
 from backend.services.ai_response_generator import process_user_input_for_ai_response
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 from backend.ml_model import get_event_emotion
@@ -22,17 +27,25 @@ from transformers import pipeline
 =======
 from transformers import pipeline
 >>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
+=======
+from transformers import pipeline
+>>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
 import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 from pymongo import MongoClient
 from pymongo.errors import ConnectionError
 # Removed unused import: from fastapi.encoders import jsonable_encoder   
 
+=======
+from pymongo import MongoClient
+from pymongo.errors import ConnectionError
+>>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
 =======
 from pymongo import MongoClient
 from pymongo.errors import ConnectionError
@@ -48,9 +61,12 @@ from bson import ObjectId
 
 from evolancewebapp.backend.server import ALGORITHM
 
+<<<<<<< HEAD
 
 from bson import ObjectId
 
+=======
+>>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -60,9 +76,15 @@ mongo_url = os.environ['MONGO_URL']
 mongo_db_name = os.environ['DB_NAME']
 mongo_collection_name = os.environ("COLLECTION_NAME")
 client = AsyncIOMotorClient(mongo_url)
+<<<<<<< HEAD
 db = None
 music_collection = None
 journal_collection = None
+=======
+db = client[os.environ['DB_NAME']]
+customer_collection = db.get_collection("customers")
+interaction_collection = db.get_collection("interactions")
+>>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
 
 db = client[os.environ['DB_NAME']]
 <<<<<<< HEAD
@@ -205,6 +227,89 @@ customer_collection = db.get_collection("customers")
 interaction_collection = db.get_collection("interactions")
 >>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
 
+
+# Create a router with the /api prefix
+api_router = APIRouter(prefix="/api")
+
+# Global variable for sentiment_pipeline
+sentiment_pipeline = None
+
+# Connect MongoDB and Hugging Face Transformers on startup
+
+@api_router.on_event("startup")
+async def connect_to_mongodb_and_load_models():
+    global client, db, customer_collection, interaction_collection, sentiment_pipeline
+    try:
+        customer_collection = db.get_collection("customers")
+        interaction_collection = db.get_collection("interactions")
+        client = AsyncIOMotorClient(mongo_url)
+        await client.admin.command('ping')
+        print("✅ Connected to MongoDB successfully!")
+        db = client[os.environ['DB_NAME']]
+        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}")
+    except Exception as e:
+        print(f"Error connecting to MongoDB: {e}")
+        client = None
+  
+    try:
+        sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")   
+        print("✅ Sentiment analysis model loaded successfully!")
+
+    except Exception as e:
+        print(f"Error loading sentiment analysis model: {e}")
+        sentiment_pipeline = None 
+
+   # Close MongoDB connection to shutdown
+@api_router.on_event("shutdown")
+async def close_mongodb_connection():
+    if client:
+        await client.close()
+        print("✅ MongoDB connection closed.")
+
+    # Helper function for Hugging Face to custom mood mapping
+
+def map_sentiment_to_mood(sentiment_label: str) -> str:
+        """
+        Map sentiment labels from Hugging Face to custom mood categories
+        """
+        if sentiment_label == "POSITIVE":
+            return "joy"
+        elif sentiment_label == "NEGATIVE":
+            return "sadness/anger"
+        elif sentiment_label == "NEUTRAL":
+            return "calm"
+        return "neutral"
+
+# Helper Function for MongoDB
+
+class PyObjectId(ObjectId):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v):
+        if not ObjectId.is_valid(v):
+            raise ValueError("Invalid objectid")
+        return ObjectId(v)
+
+    @classmethod
+    def __modify_schema__(cls, field_schema):
+        field_schema.update(type="string", pattern="^[a-fA-F0-9]{24}$")        
+
+# Helper Function for sentiment analysis
+def analyze_sentiment(text: str) -> Dict[str, Any]:
+    """
+    Perform sentiment analysis using Hugging Face Transformers
+    Returns the label (POSITIVE/NEGATIVE/NEUTRAL) and score (confidence)
+    """ 
+    if not sentiment_pipeline:
+        raise RuntimeError("Sentiment analysis model is not loaded.")
+    result = sentiment_pipeline(text)[0]
+    return {
+        "label": result["label"],
+        "score": round(result["score"], 4)
+    }
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
@@ -657,6 +762,7 @@ class Config:
             "sentiment_score": 0.95
         }
     }
+<<<<<<< HEAD
 
   # Customer Model
 class Customer(BaseModel):
@@ -789,7 +895,117 @@ class AnalyzedInteractResponse(BaseModel):
                 "company": "Wellness Centre",
             }    
         }
+=======
 
+
+# FastAPI endpoints - Customer 
+>>>>>>> d05a4cf77781bb74bbeed40376ee40fb23a57b13
+
+@api_router.post("/customers/", response_model=Customer, summary="Create a new customer")
+async def create_customer(customer: Customer):
+    """Create a new customer in the database."""
+    customer_data = customer.model_dump()
+    result = await customer_collection.insert_one(customer_data)
+    new_customer = await customer_collection.find_one({"_id": result.inserted_id})
+    return Customer(**new_customer)
+
+@api_router.get("/customers/", response_model=List[Customer], summary="Get all customers")
+async def get_customers():
+    """Retrieve all customers from the database."""
+    customers = []
+    async for customer in customer_collection.find():
+        customers.append(Customer(**customer))
+    return customers
+
+@api_router.get("/customers/{customer_id}", response_model=Customer, summary="Get a customer by ID")
+async def get_customer(customer_id: str):
+    """Retrieve a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer = await customer_collection.find_one({"_id": ObjectId(customer_id)})
+    if customer:
+       return Customer(**customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.put("/customers/{customer_id}", response_model=Customer, summary="Update a customer by ID")
+async def update_customer(customer_id: str, customer: Customer):
+    """Update a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    updated_data = customer.model_dump(exclude_unset=True, by_alias=True)
+    if not updated_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+    updated_result = await customer_collection.update_one({"_id": ObjectId(customer_id)}, {"$set": updated_data})
+    if updated_result.modified_count == 1:
+        updated_customer = await customer_collection.find_one({"_id": ObjectId(customer_id)})
+        return Customer(**updated_customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.delete("/customers/{customer_id}", summary="Delete a customer by ID")
+async def delete_customer(customer_id: str):
+    """Delete a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    delete_result = await customer_collection.delete_one({"_id": ObjectId(customer_id)})
+    if delete_result.deleted_count == 1:
+        await interaction_collection.delete_many({"customer_id": customer_id})
+        return {"message": "Customer and interactions deleted"}
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+# FastAPI endpoints - Interactions
+
+@api_router.post("/interactions/", response_model=Interaction, summary="Create a new interaction")
+async def create_interaction(interaction: Interaction):
+    """Create a new interaction in the database."""
+    if not ObjectId.is_valid(interaction.customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer_exists = await customer_collection.find_one({"_id": ObjectId(interaction.customer_id)})
+    if not customer_exists:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.get("/interactions/{interaction_id}", response_model=Interaction, summary="Retrieve an interaction by ID")
+async def get_interaction(interaction_id: str):
+    """Retrieve an interaction by its ID."""
+    interaction = get_interaction(interaction_id)
+    if not interaction:
+        raise HTTPException(status_code=404, detail="Interaction not found")
+    """Perform sentiment analysis on both customer message and evolance response"""
+    sentiment_result = sentiment_pipeline(interaction.customer_message)[0]
+    interaction["sentiment"] = sentiment_result['label']
+    interaction["sentiment_score"] = sentiment_result['score']
+    interaction_data = interaction.model_dump(by_alias=True, exclude_none=True)
+    result = await interaction_collection.insert_one(interaction_data)
+    new_interaction = await interaction_collection.find_one({"_id": result.inserted_id})
+    return Interaction(**new_interaction)
+
+@api_router.put("/interactions/{interaction_id}", response_model=Interaction, summary="Update an interaction by ID")
+async def update_interaction(interaction_id: str, interaction: Interaction):
+    """Update an interaction by its ID."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    update_data = interaction.model_dump(exclude_unset=True, by_alias=True)
+    update_data.pop("_id", None)  # Remove id from update data
+    update_data.pop("sentiment", None)  # Remove Sentiment from update data
+    update_data.pop("sentiment_score", None)  # Remove Sentiment score from update data
+
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+
+    updated_result = await interaction_collection.update_one({"_id": ObjectId(interaction_id)}, {"$set": update_data})
+    if updated_result.modified_count == 1:
+        updated_interaction = await interaction_collection.find_one({"_id": ObjectId(interaction_id)})
+        return Interaction(**updated_interaction)
+    raise HTTPException(status_code=404, detail="Interaction not found")
+
+@api_router.delete("/interactions/{interaction_id}", summary="Delete an interaction by ID")
+async def delete_interaction(interaction_id: str):
+    """Delete an interaction by its ID."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    delete_result = await interaction_collection.delete_one({"_id": ObjectId(interaction_id)})
+    if delete_result.deleted_count == 1:
+        return {"message": "Interaction deleted successfully"}
+    raise HTTPException(status_code=404, detail="Interaction not found")
 
     # Configurations for Interaction Model
     class Config:
