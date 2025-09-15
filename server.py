@@ -463,6 +463,24 @@ class Config:
         }
     schema_extra = {
         "example": {
+            "name": "Ramona Naidoo",
+            "email": "ramona.naidoo@example.com",
+            "phone": "+27123456789",
+            "address" : "123 Main St, Cape Town, South Africa",
+            "company": "Evolance"
+        }
+    }
+
+    # Configurations for Interaction Model
+class Config:
+    allow_population_by_field_name = True
+    arbitrary_types_allowed = True
+    json_encoders = {
+         datetime: lambda dt: dt.isoformat() + "z",
+         ObjectId: str
+        }
+    schema_extra = {
+        "example": {
             "customer_id": "12345",
             "interaction_type": "chat",
             "interaction_date": "2023-10-05",
@@ -471,6 +489,7 @@ class Config:
             "sentiment_score": 0.95
         }
     }
+
 
 # FastAPI endpoints - Customer 
 
