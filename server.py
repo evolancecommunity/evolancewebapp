@@ -8,11 +8,14 @@ from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
 from backend.services.ai_response_generator import process_user_input_for_ai_response
+from transformers import pipeline
 import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
+from pymongo import MongoClient
+from pymongo.errors import ConnectionError
 import uuid
 from datetime import datetime, timedelta
 import hashlib
@@ -20,6 +23,8 @@ import jwt
 from passlib.context import CryptContext
 import openai
 from openai import OpenAI
+from bson import ObjectId
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -28,11 +33,97 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+customer_collection = db.get_collection("customers")
+interaction_collection = db.get_collection("interactions")
 
+
+# Create a router with the /api prefix
+api_router = APIRouter(prefix="/api")
+
+# Connect MongoDB and Hugging Face Transformers on startup
+
+@api_router.on_event("startup")
+async def connect_to_mongodb_and_load_models():
+    global client, db, customer_collection, interaction_collection, sentiment_pipeline
+    try:
+        customer_collection = db.get_collection("customers")
+        interaction_collection = db.get_collection("interactions")
+        client = AsyncIOMotorClient(mongo_url)
+        await client.admin.command('ping')
+        print("✅ Connected to MongoDB successfully!")
+        db = client[os.environ['DB_NAME']]
+        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}")
+    except Exception as e:
+       print(f"Error connecting to MongoDB: {e}")
+       client = None
+
+    except Exception as e:
+        print(f"Error connecting to MongoDB: {e}")
+        client = None
+
+    try:
+        sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")   
+        print("✅ Sentiment analysis model loaded successfully!")
+
+    except Exception as e:
+        print(f"Error loading sentiment analysis model: {e}")
+        sentiment_pipeline = None 
+
+   # Close MongoDB connection to shutdown
+@api_router.on_event("shutdown")
+async def close_mongodb_connection():
+    if client:
+        await client.close()
+        print("✅ MongoDB connection closed.")
+
+    # Helper function for Hugging Face to custom mood mapping
+
+def map_sentiment_to_mood(sentiment_label: str) -> str:
+        """
+        Map sentiment labels from Hugging Face to custom mood categories
+        """
+        if sentiment_label == "POSITIVE":
+            return "joy"
+        elif sentiment_label == "NEGATIVE":
+            return "sadness/anger"
+        elif sentiment_label == "NEUTRAL":
+            return "calm"
+        return "neutral"
+
+# Helper Function for MongoDB
+
+class PyObjectId(ObjectId):
+    @classmethod
+    def __get_validators__(cls):
+        yield cls.validate
+
+    @classmethod
+    def validate(cls, v):
+        if not ObjectId.is_valid(v):
+            raise ValueError("Invalid objectid")
+        return ObjectId(v)
+
+    @classmethod
+    def __modify_schema__(cls, field_schema):
+        field_schema.update(type="string", pattern="^[a-fA-F0-9]{24}$")        
+
+# Helper Function for sentiment analysis
+def analyze_sentiment(text: str) -> Dict[str, Any]:
+    """
+    Perform sentiment analysis using Hugging Face Transformers
+    Returns the label (POSITIVE/NEGATIVE/NEUTRAL) and score (confidence)
+    """ 
+    if not sentiment_pipeline:
+        raise RuntimeError("Sentiment analysis model is not loaded.")
+    result = sentiment_pipeline(text)[0]
+    return {
+        "label": result["label"],
+        "score": round(result["score"], 4)
+    }
 
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
-ALGORITHM = "HS256"
+# ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # OpenAI setup
@@ -48,8 +139,8 @@ security = HTTPBearer()
 # Create the main app without a prefix
 app = FastAPI(title="TimeSoul API", description="API for TimeSoul - Evolance spiritual wellness app")
 
-# Create a router with the /api prefix
-api_router = APIRouter(prefix="/api")
+
+
 
 # User Models
 class UserCreate(BaseModel):
