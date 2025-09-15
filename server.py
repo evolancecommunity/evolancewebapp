@@ -17,7 +17,7 @@ from typing import List, Optional, Dict, Any
 from pymongo import MongoClient
 from pymongo.errors import ConnectionError
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import hashlib
 import jwt
 from passlib.context import CryptContext
@@ -44,7 +44,7 @@ api_router = APIRouter(prefix="/api")
 
 @api_router.on_event("startup")
 async def connect_to_mongodb_and_load_models():
-    global client, db, customer_collection, interaction_collection, sentiment_pipeline
+    global client, db, customer_collection, interaction_collection, senti
     try:
         customer_collection = db.get_collection("customers")
         interaction_collection = db.get_collection("interactions")
@@ -403,7 +403,62 @@ class ButtonClickLog(BaseModel):
   button_name: str
   action_description: Optional[str]
 
+# Model for customer and evolance representation interaction
+class Interaction(BaseModel):
 
+   id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+   customer_message: str = Field(..., example="I am very satisfied with the service.")
+   evolance_response: str = Field(..., example="We apologize for the inconvenience. How can we assist you further?")
+   evolance_sentiment_label: str = Field(..., example="POSITIVE")
+   evolance_sentiment_score: float = Field(..., example=0.98)
+   customer_sentiment_label: str = Field(..., example="Negative")
+   customer_sentiment_score: float = Field(..., example=0.99)
+   timestamp: datetime = Field(default_factory=datetime.date)
+
+# Create a new interaction
+class InteractionCreate(BaseModel):
+   customer_message: str = Field(..., example="How do I create an account or sign up?")
+   evolance_response: str = Field(..., example="Welcome! You can create an account by providing a valid email address, a secure password, and your full name on the sign-up page. The system will create a new user ID for you, which will be the basis for all your data and progress in the app.")
+
+# Sentiment analysis result
+class SentimentResult(BaseModel):
+   label: str = Field(..., example="POSITIVE")
+   score: float = Field(..., example=0.98)
+
+# Response after sentiment analysis
+class AnalyzedInteractionResponse(BaseModel):
+   id: str = Field(..., example="64f0c9e2b5e4c3a1d2f3e4b5")
+   customer_message: str = Field(..., example="I am very satisfied with the service.")
+   evolance_response: str = Field(..., example="We apologize for the inconvenience. How can we assist you further?")
+   evolance_sentiment: SentimentResult
+   customer_sentiment: SentimentResult
+   timestamp: datetime = Field(..., example="2023-10-05T14:48:00.000Z")      
+
+# configurations for interaction model between customer and evolance representative
+
+class Config:
+    arbitrary_types_allowed = True
+    json_encoders = {ObjectId: str}
+    populated_by_name = True
+
+# Configurations for Customer Model
+class Config:
+    allow_population_by_field_name = True
+    arbitrary_types_allowed = True
+    json_encoders = {
+         datetime: lambda dt: dt.isoformat() + "z",
+         ObjectId: str
+        }
+    schema_extra = {
+        "example": {
+            "customer_id": "12345",
+            "interaction_type": "chat",
+            "interaction_date": "2023-10-05",
+            "summary" : "Customer inquired about subscription plans",
+            "sentiment": "positive",
+            "sentiment_score": 0.95
+        }
+    }
 
 
 
