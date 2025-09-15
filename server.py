@@ -25,6 +25,8 @@ import openai
 from openai import OpenAI
 from bson import ObjectId
 
+from evolancewebapp.backend.server import ALGORITHM
+
 
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
@@ -40,11 +42,14 @@ interaction_collection = db.get_collection("interactions")
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
 
+# Global variable for sentiment_pipeline
+sentiment_pipeline = None
+
 # Connect MongoDB and Hugging Face Transformers on startup
 
 @api_router.on_event("startup")
 async def connect_to_mongodb_and_load_models():
-    global client, db, customer_collection, interaction_collection, senti
+    global client, db, customer_collection, interaction_collection, sentiment_pipeline
     try:
         customer_collection = db.get_collection("customers")
         interaction_collection = db.get_collection("interactions")
@@ -53,10 +58,6 @@ async def connect_to_mongodb_and_load_models():
         print("✅ Connected to MongoDB successfully!")
         db = client[os.environ['DB_NAME']]
         print(f"Connected to MongoDB database: {os.environ['DB_NAME']}")
-    except Exception as e:
-       print(f"Error connecting to MongoDB: {e}")
-       client = None
-
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
         client = None
@@ -398,10 +399,21 @@ class ButtonClickLog(BaseModel):
   Includes a timestamp for when the event occurred.
   """   
   id: str 
-  timestamp: datetime = Field(default_factory=datetime.utcnow)
+  timestamp: datetime = Field(default_factory=datetime.date)
   user_id: str
   button_name: str
   action_description: Optional[str]
+
+# Customer Model
+class Customer(BaseModel):
+   id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+   name: str = Field(..., example="Ramona Naidoo")
+   email: str = Field(..., example="ramona.naidoo@example.com")
+   phone: Optional[str] = Field(None, example="+27123456789")
+   address: Optional[str] = Field(None, example="123 Main St, Cape Town, South Africa")
+   time_zone: Optional[str] = Field(None, example="Central African Time")
+   created_at: datetime = Field(default_factory=datetime.date)
+   updated_at: datetime = Field(default_factory=datetime.date)
 
 # Model for customer and evolance representation interaction
 class Interaction(BaseModel):
@@ -460,7 +472,58 @@ class Config:
         }
     }
 
+# FastAPI endpoints - Customer 
 
+@api_router.post("/customers/", response_model=Customer, summary="Create a new customer")
+async def create_customer(customer: Customer):
+    """Create a new customer in the database."""
+    customer_data = customer.model_dump()
+    result = await customer_collection.insert_one(customer_data)
+    new_customer = await customer_collection.find_one({"_id": result.inserted_id})
+    return Customer(**new_customer)
+
+@api_router.get("/customers/", response_model=List[Customer], summary="Get all customers")
+async def get_customers():
+    """Retrieve all customers from the database."""
+    customers = []
+    async for customer in customer_collection.find():
+        customers.append(Customer(**customer))
+    return customers
+
+@api_router.get("/customers/{customer_id}", response_model=Customer, summary="Get a customer by ID")
+async def get_customer(customer_id: str):
+    """Retrieve a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer = await customer_collection.find_one({"_id": ObjectId(customer_id)})
+    if customer:
+       return Customer(**customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.put("/customers/{customer_id}", response_model=Customer, summary="Update a customer by ID")
+async def update_customer(customer_id: str, customer: Customer):
+    """Update a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    updated_data = customer.model_dump(exclude_unset=True, by_alias=True)
+    if not updated_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+    updated_result = await customer_collection.update_one({"_id": ObjectId(customer_id)}, {"$set": updated_data})
+    if updated_result.modified_count == 1:
+        updated_customer = await customer_collection.find_one({"_id": ObjectId(customer_id)})
+        return Customer(**updated_customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.delete("/customers/{customer_id}", summary="Delete a customer by ID")
+async def delete_customer(customer_id: str):
+    """Delete a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    delete_result = await customer_collection.delete_one({"_id": ObjectId(customer_id)})
+    if delete_result.deleted_count == 1:
+        await interaction_collection.delete_many({"customer_id": customer_id})
+        return {"message": "Customer and interactions deleted"}
+    raise HTTPException(status_code=404, detail="Customer not found")
 
 # FastAPI endpoints - Emolytics
 
@@ -561,9 +624,9 @@ def get_password_hash(password: str) -> str:
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.date.today() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.date.today() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
