@@ -3,7 +3,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-from backend.services.emotion_service import detect_emotion 
+from backend.services.emotion_service import detect_emotion # resolved merge conflicts
 from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
@@ -61,7 +61,7 @@ async def connect_to_mongodb_and_load_models():
     except Exception as e:
         print(f"Error connecting to MongoDB: {e}")
         client = None
-
+  
     try:
         sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")   
         print("✅ Sentiment analysis model loaded successfully!")
