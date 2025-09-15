@@ -525,6 +525,61 @@ async def delete_customer(customer_id: str):
         return {"message": "Customer and interactions deleted"}
     raise HTTPException(status_code=404, detail="Customer not found")
 
+# FastAPI endpoints - Interactions
+
+@api_router.post("/interactions/", response_model=Interaction, summary="Create a new interaction")
+async def create_interaction(interaction: Interaction):
+    """Create a new interaction in the database."""
+    if not ObjectId.is_valid(interaction.customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer_exists = await customer_collection.find_one({"_id": ObjectId(interaction.customer_id)})
+    if not customer_exists:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.get("/interactions/{interaction_id}", response_model=Interaction, summary="Retrieve an interaction by ID")
+async def get_interaction(interaction_id: str):
+    """Retrieve an interaction by its ID."""
+    interaction = get_interaction(interaction_id)
+    if not interaction:
+        raise HTTPException(status_code=404, detail="Interaction not found")
+    """Perform sentiment analysis on both customer message and evolance response"""
+    sentiment_result = sentiment_pipeline(interaction.customer_message)[0]
+    interaction["sentiment"] = sentiment_result['label']
+    interaction["sentiment_score"] = sentiment_result['score']
+    interaction_data = interaction.model_dump(by_alias=True, exclude_none=True)
+    result = await interaction_collection.insert_one(interaction_data)
+    new_interaction = await interaction_collection.find_one({"_id": result.inserted_id})
+    return Interaction(**new_interaction)
+
+@api_router.put("/interactions/{interaction_id}", response_model=Interaction, summary="Update an interaction by ID")
+async def update_interaction(interaction_id: str, interaction: Interaction):
+    """Update an interaction by its ID."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    update_data = interaction.model_dump(exclude_unset=True, by_alias=True)
+    update_data.pop("_id", None)  # Remove id from update data
+    update_data.pop("sentiment", None)  # Remove Sentiment from update data
+    update_data.pop("sentiment_score", None)  # Remove Sentiment score from update data
+
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+
+    updated_result = await interaction_collection.update_one({"_id": ObjectId(interaction_id)}, {"$set": update_data})
+    if updated_result.modified_count == 1:
+        updated_interaction = await interaction_collection.find_one({"_id": ObjectId(interaction_id)})
+        return Interaction(**updated_interaction)
+    raise HTTPException(status_code=404, detail="Interaction not found")
+
+@api_router.delete("/interactions/{interaction_id}", summary="Delete an interaction by ID")
+async def delete_interaction(interaction_id: str):
+    """Delete an interaction by its ID."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    delete_result = await interaction_collection.delete_one({"_id": ObjectId(interaction_id)})
+    if delete_result.deleted_count == 1:
+        return {"message": "Interaction deleted successfully"}
+    raise HTTPException(status_code=404, detail="Interaction not found")
+
 # FastAPI endpoints - Emolytics
 
 @api_router.post("/chat", response_model=AIResponse,summary = "Process user input and generate AI response")
