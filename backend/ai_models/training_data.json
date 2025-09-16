@@ -1,0 +1,5808 @@
+{
+  "emotion_data": [
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 70,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471430"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 71,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471447"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 72,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471453"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 73,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471458"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 74,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471463"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 75,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471467"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 76,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471470"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 77,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471476"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 78,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471480"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 79,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471484"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 80,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471488"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 81,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471491"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 82,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471495"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 83,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471499"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 84,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471502"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 85,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471506"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 86,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471509"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 87,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471512"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 88,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471516"
+    },
+    {
+      "text": "I'm happy",
+      "primary_emotion": "joy",
+      "intensity": 89,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471519"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 70,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471531"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 71,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471535"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 72,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471539"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 73,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471542"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 74,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471546"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 75,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471549"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 76,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471553"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 77,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471567"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 78,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471571"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 79,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471574"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 80,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471578"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 81,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471581"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 82,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471585"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 83,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471589"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 84,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471593"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 85,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471596"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 86,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471600"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 87,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471603"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 88,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471607"
+    },
+    {
+      "text": "I'm sad",
+      "primary_emotion": "sadness",
+      "intensity": 89,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471610"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 70,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471624"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 71,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471628"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 72,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471632"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 73,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471635"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 74,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471638"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 75,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471642"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 76,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471645"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 77,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471649"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 78,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471652"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 79,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.471656"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 80,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623898"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 81,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623908"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 82,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623912"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 83,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623915"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 84,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623919"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 85,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623922"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 86,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623925"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 87,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623929"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 88,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623932"
+    },
+    {
+      "text": "I'm angry",
+      "primary_emotion": "anger",
+      "intensity": 89,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623936"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 70,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623946"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 71,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623958"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 72,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623966"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 73,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623969"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 74,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623973"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 75,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623977"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 76,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623980"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 77,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623984"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 78,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623987"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 79,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623990"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 80,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623994"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 81,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.623997"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 82,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624000"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 83,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624003"
+    },
+    {
+      "text": "I'm anxious about the future",
+      "primary_emotion": "anxiety",
+      "intensity": 84,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624007"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 70,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624021"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 71,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624024"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 72,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624029"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 73,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624032"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 74,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624035"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 75,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624038"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 76,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624042"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 77,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624045"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 78,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624048"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 79,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624051"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 80,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624054"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 81,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624057"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 82,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624061"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 83,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624064"
+    },
+    {
+      "text": "I'm grateful for my life",
+      "primary_emotion": "gratitude",
+      "intensity": 84,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624067"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 70,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624091"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 71,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624132"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 72,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624149"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 73,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624154"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 74,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624157"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 75,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624160"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 76,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624163"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 77,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624167"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 78,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624170"
+    },
+    {
+      "text": "I'm frustrated with myself",
+      "primary_emotion": "frustration",
+      "intensity": 79,
+      "secondary_emotions": [
+        "concern"
+      ],
+      "triggers": [
+        "life events"
+      ],
+      "timestamp": "2025-07-09T19:01:54.624173"
+    }
+  ],
+  "conversation_pairs": [
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471442"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471448"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471455"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471459"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471464"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471468"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471471"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471477"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471481"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471485"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471489"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471493"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471496"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471500"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471503"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 85,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471506"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 86,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471510"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 87,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471513"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 88,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471517"
+    },
+    {
+      "user_input": "I'm happy",
+      "ai_response": "I understand your joy. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 89,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "timestamp": "2025-07-09T19:01:54.471520"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471533"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471536"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471540"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471543"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471547"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471550"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471554"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471568"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471572"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471575"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471579"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471582"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471586"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471590"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471594"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 85,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471597"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 86,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471601"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 87,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471604"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 88,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471608"
+    },
+    {
+      "user_input": "I'm sad",
+      "ai_response": "I understand your sadness. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 89,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "timestamp": "2025-07-09T19:01:54.471611"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471626"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471629"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471633"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471636"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471639"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471643"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471646"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471650"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471654"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.471657"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623904"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623909"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623913"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623916"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623920"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 85,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623923"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 86,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623926"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 87,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623930"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 88,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623933"
+    },
+    {
+      "user_input": "I'm angry",
+      "ai_response": "I understand your anger. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 89,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "timestamp": "2025-07-09T19:01:54.623937"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623948"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623962"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623967"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623970"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623974"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623978"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623981"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623985"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623988"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623991"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623995"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.623998"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.624001"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.624004"
+    },
+    {
+      "user_input": "I'm anxious about the future",
+      "ai_response": "I understand your anxiety. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "timestamp": "2025-07-09T19:01:54.624008"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624022"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624026"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624030"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624033"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624036"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624039"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624042"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624046"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624049"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624052"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624055"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624058"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624062"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624065"
+    },
+    {
+      "user_input": "I'm grateful for my life",
+      "ai_response": "I understand your gratitude. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "timestamp": "2025-07-09T19:01:54.624068"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624128"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624133"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624151"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624154"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624158"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624161"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624164"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624167"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624171"
+    },
+    {
+      "user_input": "I'm frustrated with myself",
+      "ai_response": "I understand your frustration. Let's work through this.",
+      "emotion_context": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "timestamp": "2025-07-09T19:01:54.624174"
+    }
+  ],
+  "emolytics_patterns": [
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471443"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471449"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471456"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471461"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471465"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471469"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471472"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471478"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471482"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471486"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471490"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471493"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471497"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471500"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471504"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 85,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471507"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 86,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471511"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 87,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471514"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 88,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471518"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "joy",
+        "emotion_intensity": 89,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses joy"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "joy",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471521"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471533"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471537"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471540"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471544"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471548"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471551"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471563"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471569"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471573"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471576"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471580"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471583"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471587"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471591"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471595"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 85,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471598"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 86,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471602"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 87,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471605"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 88,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471609"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "sadness",
+        "emotion_intensity": 89,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses sadness"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "sadness",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471612"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471627"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471630"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471633"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471637"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471640"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471644"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471647"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471650"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471655"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.471658"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623906"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623910"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623914"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623917"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623921"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 85,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623924"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 86,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623927"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 87,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623931"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 88,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623934"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anger",
+        "emotion_intensity": 89,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anger"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anger",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623938"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623949"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623964"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623968"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623971"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623975"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623979"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623982"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623986"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623989"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623992"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623996"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.623999"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624002"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624005"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "anxiety",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses anxiety"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "anxiety",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624008"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624023"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624027"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624030"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624034"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624037"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624040"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624043"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624046"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624050"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624053"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 80,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624056"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 81,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624059"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 82,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624062"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 83,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624066"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "gratitude",
+        "emotion_intensity": 84,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses gratitude"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "gratitude",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624069"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 70,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624130"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 71,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624147"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 72,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624152"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 73,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624155"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 74,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624158"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 75,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624162"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 76,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624165"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 77,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624168"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 78,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624171"
+    },
+    {
+      "emotion_data": {
+        "primary_emotion": "frustration",
+        "emotion_intensity": 79,
+        "secondary_emotions": [
+          "concern"
+        ],
+        "emotional_triggers": [
+          "life events"
+        ],
+        "reasoning": "User expresses frustration"
+      },
+      "emolytics_update": {
+        "emotional_state": {
+          "current_emotion": "frustration",
+          "intensity": 70,
+          "stability": 60
+        },
+        "recommendations": {
+          "immediate_actions": [
+            "Breathe deeply"
+          ]
+        },
+        "analytics_metrics": {
+          "emotional_variability": 60,
+          "wellness_progress": 60
+        }
+      },
+      "timestamp": "2025-07-09T19:01:54.624174"
+    }
+  ]
+}

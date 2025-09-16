@@ -3,19 +3,18 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
-from backend.services.emotion_service import detect_emotion # resolved merge conflicts
+
 from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
 from backend.services.ai_response_generator import process_user_input_for_ai_response
-from transformers import pipeline
+
 import os
 import logging
 from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
-from pymongo import MongoClient
-from pymongo.errors import ConnectionError
+
 import uuid
 from datetime import datetime, timedelta, date
 import hashlib
@@ -26,6 +25,9 @@ from openai import OpenAI
 from bson import ObjectId
 
 from evolancewebapp.backend.server import ALGORITHM
+
+
+from bson import ObjectId
 
 
 ROOT_DIR = Path(__file__).parent
@@ -45,51 +47,11 @@ api_router = APIRouter(prefix="/api")
 # Global variable for sentiment_pipeline
 sentiment_pipeline = None
 
+
 # Connect MongoDB and Hugging Face Transformers on startup
 
 @api_router.on_event("startup")
 async def connect_to_mongodb_and_load_models():
-    global client, db, customer_collection, interaction_collection, sentiment_pipeline
-    try:
-        customer_collection = db.get_collection("customers")
-        interaction_collection = db.get_collection("interactions")
-        client = AsyncIOMotorClient(mongo_url)
-        await client.admin.command('ping')
-        print("✅ Connected to MongoDB successfully!")
-        db = client[os.environ['DB_NAME']]
-        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}")
-    except Exception as e:
-        print(f"Error connecting to MongoDB: {e}")
-        client = None
-  
-    try:
-        sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")   
-        print("✅ Sentiment analysis model loaded successfully!")
-
-    except Exception as e:
-        print(f"Error loading sentiment analysis model: {e}")
-        sentiment_pipeline = None 
-
-   # Close MongoDB connection to shutdown
-@api_router.on_event("shutdown")
-async def close_mongodb_connection():
-    if client:
-        await client.close()
-        print("✅ MongoDB connection closed.")
-
-    # Helper function for Hugging Face to custom mood mapping
-
-def map_sentiment_to_mood(sentiment_label: str) -> str:
-        """
-        Map sentiment labels from Hugging Face to custom mood categories
-        """
-        if sentiment_label == "POSITIVE":
-            return "joy"
-        elif sentiment_label == "NEGATIVE":
-            return "sadness/anger"
-        elif sentiment_label == "NEUTRAL":
-            return "calm"
-        return "neutral"
 
 # Helper Function for MongoDB
 
@@ -99,28 +61,7 @@ class PyObjectId(ObjectId):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid objectid")
-        return ObjectId(v)
 
-    @classmethod
-    def __modify_schema__(cls, field_schema):
-        field_schema.update(type="string", pattern="^[a-fA-F0-9]{24}$")        
-
-# Helper Function for sentiment analysis
-def analyze_sentiment(text: str) -> Dict[str, Any]:
-    """
-    Perform sentiment analysis using Hugging Face Transformers
-    Returns the label (POSITIVE/NEGATIVE/NEUTRAL) and score (confidence)
-    """ 
-    if not sentiment_pipeline:
-        raise RuntimeError("Sentiment analysis model is not loaded.")
-    result = sentiment_pipeline(text)[0]
-    return {
-        "label": result["label"],
-        "score": round(result["score"], 4)
-    }
 
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
@@ -336,6 +277,7 @@ class Token(BaseModel):
     access_token: str
     token_type: str
 
+
 class UserInput(BaseModel):
     user_id: str
     conversation_id: str
@@ -471,25 +413,37 @@ class Config:
         }
     }
 
-    # Configurations for Interaction Model
-class Config:
-    allow_population_by_field_name = True
-    arbitrary_types_allowed = True
-    json_encoders = {
-         datetime: lambda dt: dt.isoformat() + "z",
-         ObjectId: str
-        }
-    schema_extra = {
-        "example": {
-            "customer_id": "12345",
-            "interaction_type": "chat",
-            "interaction_date": "2023-10-05",
-            "summary" : "Customer inquired about subscription plans",
-            "sentiment": "positive",
-            "sentiment_score": 0.95
-        }
-    }
 
+    if "description" in update_data:
+        sentimental_result = sentiment_pipeline(update_data["description"])[0]
+        update_data["sentiment"] = sentimental_result['label']
+        update_data["sentiment_score"] = sentimental_result['score']
+
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields to update")
+
+    update_result = await support_tickets_collection.update_one({"_id": ObjectId(ticket_id)}, {"$set": update_data})
+
+    if update_result.modified_count == 1:
+        updated_ticket = await support_tickets_collection.find_one({"_id": ObjectId(ticket_id)})
+        return SupportTicket(**updated_ticket)
+    raise HTTPException(status_code=404, detail="Support ticket not found or no changes made")    
+
+@api_router.delete("/tickets/{ticket_id}", summary="Delete a support ticket")
+async def delete_support_ticket(ticket_id: str):
+    """Deletes a support ticket from the system."""
+    if not ObjectId.is_valid(ticket_id):
+        raise HTTPException(status_code=400, detail="Invalid ticket ID format")
+
+    delete_result = await support_tickets_collection.delete_one({"_id": ObjectId(ticket_id)})
+    if delete_result.deleted_count == 1:
+        return {"detail": "Support ticket deleted successfully"}
+    raise HTTPException(status_code=404, detail="Support ticket not found")
+
+@app.get("/")
+async def root():
+    """Root endpoint to check if the API is running."""
+    return {"message": "Welcome to the CRM Support API! Use /api/docs for documentation."}    
 
 # FastAPI endpoints - Customer 
 
@@ -647,7 +601,10 @@ async def get_logs():
     """Retrieves all stored interaction logs from MongoDB."""
     logs = log_service.get_all_log_entries()
     if not logs:
+        raise HTTPException(status_code=404, detail="No logs found.")
+
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No logs found.")
+
     return logs
 
 # You might want to add a health check endpoint
@@ -685,8 +642,69 @@ async def get_chat_history(conversation_id: str):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"An error occurred: {str(e)}"
         )
-    
-    
+
+
+ # FastAPI endpoints - Music suggestions
+
+@api_router.post("/music/suggest", response_model=MusicPreference, summary="Get music suggestions based on mood or text")
+async def suggest_music(request: MusicSuggestionRequest):
+    """
+    Suggests music tracks based on the user's mood or text input.
+    """
+    if not client:
+        raise HTTPException(status_code=503, detail="Music service is not available")
+    detected_mood = request.mood
+    if request.text:
+        if not sentiment_pipeline:
+            raise HTTPException(status_code=503, detail="Sentiment analysis service is not available")
+        try:
+            # Use the hugging face model
+            sentiment = sentiment_pipeline(request.text)[0]
+            sentiment_label = sentiment['label']
+            detected_mood = map_sentiment_to_mood(sentiment_label)
+            print(f"Text: '{request.text}', Detected sentiment: {sentiment_label}, Detected Mood: {detected_mood}")
+        except Exception as e:
+            print(f"Error analyzing sentiment: {e}")
+            raise HTTPException(status_code=500, detail=f"Error analyzing sentiment: {e}")
+    elif not detected_mood:
+        raise HTTPException(status_code=400, detail="Mood or text input is required for music suggestions")  
+    # Get music suggestions based on the detected mood 
+    suggestions = get_music_suggestions_by_mood(detected_mood)
+
+    # Here you would implement the logic to suggest music tracks based on the detected mood
+    # For now, let's return the received request as a placeholder
+    return {"mood": detected_mood, "suggested_tracks": suggestions}
+
+@api_router.post("/music/preference", response_model=MusicPreference, summary="Save user's music preferences")
+async def save_music_preference(preference: MusicPreference):
+    """
+    Saves the user's music preferences.
+    """
+    if not client:
+        raise HTTPException(status_code=503, detail="Music service is not available")
+    try:
+        result = await music_collection_name.insert_one(preference.model_dump(exclude_none=True, by_alias=True))
+        return {"message": "Preference saved successfully", "preference_id": str(result.inserted_id)}
+    except Exception as e:
+        print(f"Error saving music preference: {e}")
+        raise HTTPException(status_code=500, detail=f"Error saving music preference: {e}")
+
+@api_router.get("/music/preferences/{user_id}", response_model=List[MusicPreference], summary="Get user's music preferences")
+async def get_music_preferences(user_id: str):
+    """
+    Retrieves the user's music preferences.
+    """
+    if not client:
+        raise HTTPException(status_code=503, detail="Music service is not available")
+    try:
+        preferences = []
+        async for doc in music_collection_name.find({"user_id": user_id}):
+            doc["_id"] = str(doc["_id"])  # Convert ObjectId to string
+            preferences.append(doc)
+        return {"user_id": user_id, "preferences": preferences}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error retrieving music preferences: {e}")
+
 
 # Utility functions
 def verify_password(plain_password: str, hashed_password: str) -> bool:
@@ -1335,6 +1353,7 @@ async def learning_experience_questionaire():
             }
         ]
         await db.learning_experience_questionaire.insert_many(questions)
+
 
 
 async def initialize_sample_stories():
