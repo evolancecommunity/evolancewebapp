@@ -4,15 +4,10 @@ from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from backend.services.emotion_service import detect_emotion 
 from backend.services.data_service import get_psychology_book_suggestions
 from backend.services.data_service import get_meditation_book_suggestions
 from backend.services.log_service import log_service
 from backend.services.ai_response_generator import process_user_input_for_ai_response
-
-from backend.ml_model import get_event_emotion
-from backend.neo4j_driver import Neo4jDriver
-from transformers import pipeline
 
 import os
 import logging
@@ -20,17 +15,17 @@ from pathlib import Path
 from pydantic import BaseModel, Field, EmailStr
 from typing import List, Optional, Dict, Any
 
-from pymongo import MongoClient
-from pymongo.errors import ConnectionError
-# Removed unused import: from fastapi.encoders import jsonable_encoder   
-
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 import hashlib
 import jwt
 from passlib.context import CryptContext
 import openai
 from openai import OpenAI
+from bson import ObjectId
+
+from evolancewebapp.backend.server import ALGORITHM
+
 
 from bson import ObjectId
 
@@ -42,106 +37,21 @@ load_dotenv(ROOT_DIR / '.env')
 mongo_url = os.environ['MONGO_URL']
 client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
+customer_collection = db.get_collection("customers")
+interaction_collection = db.get_collection("interactions")
 
-customers_collection = db.get_collection('customers')
-interactions_collection = db.get_collection('interactions')
-support_tickets_collection = db.get_collection('support_tickets')
-music_collection_name = db['music']
-journal_collection_name = db['journal']
-
-
-#Hugging Face Transformers - Sentiment Analysis
-#sentiment_pipeline = pipeline("sentiment-analysis")
 
 # Create a router with the /api prefix
 api_router = APIRouter(prefix="/api")
+
+# Global variable for sentiment_pipeline
+sentiment_pipeline = None
+
 
 # Connect MongoDB and Hugging Face Transformers on startup
 
 @api_router.on_event("startup")
 async def connect_to_mongodb_and_load_models():
-    global client, db, customers_collection, interactions_collection, support_tickets_collection, music_collection_name, sentiment_pipeline, journal_collection_name
-    try:
-        customers_collection = db.get_collection('customers')
-        interactions_collection = db.get_collection('interactions')
-        support_tickets_collection = db.get_collection('support_tickets')
-        client = AsyncIOMotorClient(mongo_url)
-        await client.admin.command('ping')
-        print("MongoDB connection successful")
-        db = client[os.environ['DB_NAME']]
-        music_collection_name = db['music']
-        journal_collection_name = db['journal']
-        print(f"Connected to MongoDB database: {os.environ['DB_NAME']}, collection: {music_collection_name},{journal_collection_name}")
-    except Exception as e:
-        print(f"Error connecting to MongoDB: {e}")
-        client = None
-       
-    except Exception as e:
-        print(f"Error connecting to MongoDB or loading models: {e}")
-        client = None
-
-    try:
-       sentiment_pipeline = pipeline("sentiment-analysis", model = 'distilbert-base-uncased-finetuned-sst-2-english')
-       print("Sentiment analysis model loaded successfully")
-    except Exception as e:
-        print(f"Error loading sentiment analysis model: {e}")
-        sentiment_pipeline = None # if loading fails
-
-# Close MongoDB connection on shutdown
-@api_router.on_event("shutdown")
-async def close_mongodb_connection():
-    if client:
-        await client.close()
-        print("MongoDB connection closed")
-
-# Helper function for Hugging Face to custom mood mapping
-def map_sentiment_to_mood(sentiment_label: str) -> str:
-    """
-    Map sentiment labels from Hugging Face to custom mood categories.
-    """
-    if sentiment_label == "POSITIVE":
-        return "happy"
-    elif sentiment_label == "NEGATIVE":
-        return "sad"
-    else:
-        return "neutral"
-
-def map_sentiment_to_mood(sentiment_label: str) -> str:
-    """
-    Map sentiment labels from Hugging Face to custom mood categories.
-    """
-    if sentiment_label == "POSITIVE":
-        return "happy"
-    elif sentiment_label == "NEGATIVE":
-        return "sad"
-    elif sentiment_label == "NEUTRAL":
-        return "calm"
-    return "neutral"
-
-def get_music_suggestions_by_mood(mood: str) -> List[Dict[str, Any]]:
-    """
-    Get music suggestions based on the user's mood.
-    """
-    suggestions = {
-       "happy": [
-           {"title": "Upbeat Jam", "artist": "Joyful Memories","genre": "pop"},
-           {"title": "Sunshine Vibes", "artist": "The Optimists", "genre": "Indie rock"}
-       ],
-       "sad": [
-           {"title": "Melancholy Echoes", "artist": "Solemn Strings", "genre": "Blues"},
-           {"title": "Rainy Day Blues", "artist": "Lonely Crooner", "genre": "Classical"}
-       ],
-       "calm": [
-           {"title": "Forest Whisper", "artist": "Natural Sounds", "genre": "Ambient"},
-           {"title": "Ocean Breeze", "artist": "Ambient Sounds", "genre": "Lo-fi"}
-       ],
-       "neutral": [
-           {"title": "Chill Background", "artist": "Lo-Fi Beats", "genre": "Lo-fi"},
-           {"title": "Focus Flow", "artist": "Study Tunes", "genre": "Instrumental"}
-       ]
-    }
-
-    return suggestions.get(mood.lower(), suggestions["neutral"])
 
 # Helper Function for MongoDB
 
@@ -151,19 +61,11 @@ class PyObjectId(ObjectId):
         yield cls.validate
 
     @classmethod
-    def validate(cls,v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid ObjectId")
-        return ObjectId(v)
-
-    @classmethod
-    def __modify_schema__(cls, field_schema: dict):
-        field_schema.update(type="string", pattern="^[a-f0-9]{24}$")
 
 
 # Security
 SECRET_KEY = os.environ.get('SECRET_KEY', 'your-secret-key-here')
-ALGORITHM = "HS256"
+# ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # OpenAI setup
@@ -179,8 +81,8 @@ security = HTTPBearer()
 # Create the main app without a prefix
 app = FastAPI(title="TimeSoul API", description="API for TimeSoul - Evolance spiritual wellness app")
 
-# Create a router with the /api prefix
-api_router = APIRouter(prefix="/api")
+
+
 
 # User Models
 class UserCreate(BaseModel):
@@ -439,329 +341,78 @@ class ButtonClickLog(BaseModel):
   Includes a timestamp for when the event occurred.
   """   
   id: str 
-  timestamp: datetime = Field(default_factory=datetime.utcnow)
+  timestamp: datetime = Field(default_factory=datetime.date)
   user_id: str
   button_name: str
   action_description: Optional[str]
 
-
-  # Customer Model
+# Customer Model
 class Customer(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    name: str
-    email: EmailStr
-    phone: Optional[str] = None
-    address: Optional[str] = None
-    company: Optional[str] = None
-    time_zone: Optional[str] = None
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)   
+   id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+   name: str = Field(..., example="Ramona Naidoo")
+   email: str = Field(..., example="ramona.naidoo@example.com")
+   phone: Optional[str] = Field(None, example="+27123456789")
+   address: Optional[str] = Field(None, example="123 Main St, Cape Town, South Africa")
+   time_zone: Optional[str] = Field(None, example="Central African Time")
+   created_at: datetime = Field(default_factory=datetime.date)
+   updated_at: datetime = Field(default_factory=datetime.date)
 
-# Interaction Model
-
+# Model for customer and evolance representation interaction
 class Interaction(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    customer_id: str
-    interaction_type: str  # e.g., 'email', 'call', 'chat'
-    interaction_date: str
-    summary: str
-    sentiment: Optional[str] = None # e.g., 'positive', 'negative', 'neutral' (Hugging Face)
-    sentiment_score: Optional[float] = None  # Confidence Score from Hugging Face
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
-# Ticket Model
+   id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+   customer_message: str = Field(..., example="I am very satisfied with the service.")
+   evolance_response: str = Field(..., example="We apologize for the inconvenience. How can we assist you further?")
+   evolance_sentiment_label: str = Field(..., example="POSITIVE")
+   evolance_sentiment_score: float = Field(..., example=0.98)
+   customer_sentiment_label: str = Field(..., example="Negative")
+   customer_sentiment_score: float = Field(..., example=0.99)
+   timestamp: datetime = Field(default_factory=datetime.date)
 
-class SupportTicket(BaseModel):
-    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
-    customer_id: str
-    subject: str
-    description: str
-    status: str = Field(default="open", description="The current status of the ticket")  # open, in_progress, resolved, closed
-    priority: str = Field(default="medium", description="The priority level of the ticket")  # low, medium, high, urgent
-    assigned_to: Optional[str] = None  # User ID of the support agent assigned to the ticket
-    resolution: Optional[str] = None  # Notes on how the ticket was resolved
-    sentiment: Optional[str] = None # e.g., 'positive', 'negative', 'neutral' (Hugging Face)
-    sentiment_score: Optional[float] = None  # Confidence Score from Hugging Face
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+# Create a new interaction
+class InteractionCreate(BaseModel):
+   customer_message: str = Field(..., example="How do I create an account or sign up?")
+   evolance_response: str = Field(..., example="Welcome! You can create an account by providing a valid email address, a secure password, and your full name on the sign-up page. The system will create a new user ID for you, which will be the basis for all your data and progress in the app.")
 
-    # Journal Space
+# Sentiment analysis result
+class SentimentResult(BaseModel):
+   label: str = Field(..., example="POSITIVE")
+   score: float = Field(..., example=0.98)
 
-    # Music suggestions models - Journey space
+# Response after sentiment analysis
+class AnalyzedInteractionResponse(BaseModel):
+   id: str = Field(..., example="64f0c9e2b5e4c3a1d2f3e4b5")
+   customer_message: str = Field(..., example="I am very satisfied with the service.")
+   evolance_response: str = Field(..., example="We apologize for the inconvenience. How can we assist you further?")
+   evolance_sentiment: SentimentResult
+   customer_sentiment: SentimentResult
+   timestamp: datetime = Field(..., example="2023-10-05T14:48:00.000Z")      
 
-class MusicSuggestionRequest(BaseModel):
-    mood: Optional[str] = None
-    text: Optional[str] = None
+# configurations for interaction model between customer and evolance representative
 
-class MusicItem(BaseModel):
-    title: str
-    artist: str
-    genre: str
+class Config:
+    arbitrary_types_allowed = True
+    json_encoders = {ObjectId: str}
+    populated_by_name = True
 
-class MusicPreference(BaseModel):
-    user_id : str
-    preferred_mood: str
-    timestamp: str
-    suggested_tracks: List[MusicItem]
-
-    
-    # Journey suggestions models - Journey space
-
-class JourneySuggestionRequest(BaseModel):
-    user_id: str
-    title: str
-    content: str
-    timestamp: str # ISO format string
-    mood: Optional[str] = None # Mood detected by A.I
-
-
-    # configurations for Customer Model
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat() + "z",
-            ObjectId: str
+# Configurations for Customer Model
+class Config:
+    allow_population_by_field_name = True
+    arbitrary_types_allowed = True
+    json_encoders = {
+         datetime: lambda dt: dt.isoformat() + "z",
+         ObjectId: str
         }
-        schema_extra = {
-            "example": {
-                "name": "Claire",
-                "email": "claire@example.com",
-                "phone": "+1234567890",
-                "address": "123 Main St, Sacramento CA, USA",
-                "company": "Wellness Centre",
-            }    
+    schema_extra = {
+        "example": {
+            "name": "Ramona Naidoo",
+            "email": "ramona.naidoo@example.com",
+            "phone": "+27123456789",
+            "address" : "123 Main St, Cape Town, South Africa",
+            "company": "Evolance"
         }
+    }
 
-
-    # Configurations for Interaction Model
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat() + "z",
-            ObjectId: str
-        }
-        schema_extra = {
-            "example": {
-                "customer_id": "12345",
-                "interaction_type": "email",
-                "interaction_date": "2023-10-01T12:00:00Z",
-                "summary": "Customer inquired about subscription plans.",
-                "sentiment": "positive",
-                "sentiment_score": 0.95
-            }    
-        }
-
-         # Configurations for Support Ticket Model
-    class Config:
-        allow_population_by_field_name = True
-        arbitrary_types_allowed = True
-        json_encoders = {
-            datetime: lambda dt: dt.isoformat() + "z",
-            ObjectId: str
-        }
-        schema_extra = {
-            "example": {
-                "customer_id": "12345",
-                "subject": "Issue with subscription",
-                "description": "Customer reported an issue with their subscription renewal.",
-                "status": "open",
-                "priority": "high",
-                "assigned_to": "admin",
-                "resolution": None,
-                "sentiment": "negative",
-                "sentiment_score": 0.85
-            }
-        }
-
-
-# FastAPI endpoints - Customer Support
-
-@api_router.post("/customers/", response_model=Customer, summary="Create a new customer")
-async def create_customer(customer: Customer):
-    """Creates a new customer in the system."""
-    customer_data = customer.model_dump(by_alias=True)
-    result = await customers_collection.insert_one(customer_data)
-    new_customer = await customers_collection.find_one({"_id": result.inserted_id})
-    return Customer(**new_customer)
-
-@api_router.get("/customers/", response_model=List[Customer], summary="Retrieve all customers")
-async def get_customers():
-    """Retrieves all customers from the system."""
-    customers =[]
-    async for customer in customers_collection.find():
-        customers.append(Customer(**customer))
-    return customers
-
-@api_router.get("/customers/{customer_id}", response_model=Customer, summary="Retrieve a customer by ID")
-async def get_customer(customer_id: str):
-    """Retrieves a customer by their ID."""
-    if not ObjectId.is_valid(customer_id):
-        raise HTTPException(status_code=400, detail="Invalid customer ID format")
-    customer = await customers_collection.find_one({"_id": ObjectId(customer_id)})
-    if customer:
-        return Customer(**customer)
-    raise HTTPException(status_code=404, detail="Customer not found")
-
-
-@app.put("/customers/{customer_id}", response_model=Customer, summary="Update a customer")
-async def update_customer(customer_id: str, customer: Customer):
-    """Updates an existing customer in the system."""
-    if not ObjectId.is_valid(customer_id):
-        raise HTTPException(status_code=400, detail="Invalid customer ID format")
-    update_data = customer.model_dump(exclude_unset=True, by_alias=True)
-    if not update_data:
-        raise HTTPException(status_code=400, detail="No fields to update")
-    
-    update_result = await customers_collection.update_one({"_id": ObjectId(customer_id)}, {"$set": update_data})
-
-    if update_result.modified_count == 1:
-        updated_customer = await customers_collection.find_one({"_id": ObjectId(customer_id)})
-        return Customer(**updated_customer)
-    raise HTTPException(status_code=404, detail="Customer not found or no changes made")
-    
-
-@api_router.delete("/customers/{customer_id}", summary="Delete a customer")
-async def delete_customer(customer_id: str):
-    """Deletes a customer by id from the system."""
-    if not ObjectId.is_valid(customer_id):
-        raise HTTPException(status_code=400, detail="Invalid customer ID format")
-    delete_result = await customers_collection.delete_one({"_id": ObjectId(customer_id)})
-    if delete_result.deleted_count == 1:
-        # Delete associated interactions and support tickets
-        await interactions_collection.delete_many({"customer_id": customer_id})
-        await support_tickets_collection.delete_many({"customer_id": customer_id})
-        return {"message": "Customer deleted successfully"}
-    raise HTTPException(status_code=404, detail="Customer not found")
-
-# FastAPI endpoints - Interaction
-
-@api_router.post("/interactions/", response_model=Interaction, summary="Create a new interaction")
-async def create_interaction(interaction: Interaction):
-    """Creates a new interaction for a customer including sentimental analysis."""
-    if not ObjectId.is_valid(interaction.customer_id):
-        raise HTTPException(status_code=400, detail="Invalid customer ID format")
-    customer_exists = await customers_collection.find_one({"_id": ObjectId(interaction.customer_id)})
-    if not customer_exists:
-        raise HTTPException(status_code=404, detail="Customer not found")
-    return interaction
-
-@api_router.get("/interactions/", response_model=List[Interaction], summary="Retrieve all interactions")
-async def get_interactions():
-    """Retrieves all interactions from the system."""
-    return get_interactions()
-
-@api_router.get("/interactions/{interaction_id}", response_model=Interaction, summary="Retrieve an interaction by ID")
-async def get_interaction(interaction_id: str):
-    """Retrieves an interaction by its ID."""
-    interaction = get_interaction(interaction_id)
-    if not interaction:
-        raise HTTPException(status_code=404, detail="Interaction not found")
-    """Perform sentiment analysis on the interaction summary"""
-    sentimental_result = sentiment_pipeline(interaction.summary)[0]
-    interaction["sentiment"] = sentimental_result['label']
-    interaction["sentiment_score"] = sentimental_result['score']
-    interaction_data = interaction.dict(by_alias=True, exclude_none=True)
-    result = await interactions_collection.insert_one(interaction_data)
-    new_interaction = await interactions_collection.find_one({"_id": result.inserted_id})
-    return interaction(**new_interaction)
-
-@app.put("/interactions/{interaction_id}", response_model=Interaction, summary="Update an interaction")
-async def update_interaction(interaction_id: str, interaction: Interaction):
-    """Updates an existing interaction by id."""
-    if not ObjectId.is_valid(interaction_id):
-        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
-    update_data = interaction.dict(exclude_unset=True, by_alias=True)
-    update_data.pop("id", None)  # Remove id from update data
-    update_data.pop("Sentiment", None)  # Remove Sentiment from update data
-    update_data.pop("Sentiment_score", None)  # Remove Sentiment_score from update data
-
-    if not update_data:
-        raise HTTPException(status_code=400, detail="No fields to update")
-
-    update_result = await interactions_collection.update_one({"_id": ObjectId(interaction_id)}, {"$set": update_data})
-
-    if update_result.modified_count == 1:
-        updated_interaction = await interactions_collection.find_one({"_id": ObjectId(interaction_id)})
-        return Interaction(**updated_interaction)
-    raise HTTPException(status_code=404, detail="Interaction not found or no changes made")
-
-@api_router.delete("/interactions/{interaction_id}", summary="Delete an interaction")
-async def delete_interaction(interaction_id: str):
-    """Deletes an interaction from the system."""
-    if not ObjectId.is_valid(interaction_id):
-        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
-
-    delete_result = await interactions_collection.delete_one({"_id": ObjectId(interaction_id)})
-
-    if delete_result.deleted_count == 1:
-        return {"message": "Interaction deleted successfully"}
-    raise HTTPException(status_code=404, detail="Interaction not found")
-
-# FastAPI endpoints - Support Ticket
-
-@api_router.post("/support-tickets/", response_model=SupportTicket, summary="Create a new support ticket")
-async def create_support_ticket(ticket: SupportTicket):
-    """Creates a new support ticket in the system."""
-    if not ObjectId.is_valid(ticket.customer_id):
-        raise HTTPException(status_code=400, detail="Invalid customer ID format")
-    customer_exists = await customers_collection.find_one({"_id": ObjectId(ticket.customer_id)})
-    if not customer_exists:
-        raise HTTPException(status_code=404, detail="Customer not found")
-    
-    # Perform sentiment analysis on the ticket description
-    sentimental_result = sentiment_pipeline(ticket.description)[0]
-    ticket.sentiment = sentimental_result['label']
-    ticket.sentiment_score = sentimental_result['score']
-
-    ticket_data = ticket.dict(by_alias=True, exclude_none=True)
-    ticket_data['created at'] = datetime.now().isoformat()
-    ticket_data['updated at'] = datetime.now().isoformat()
-
-    result = await support_tickets_collection.insert_one(ticket_data)
-    new_ticket = await support_tickets_collection.find_one({"_id": result.inserted_id})
-    return SupportTicket(**new_ticket)
-
-@api_router.get("/tickets/", response_model=List[SupportTicket], summary="Retrieve all support tickets")
-async def get_support_tickets(customer_id: Optional[str] = None, status: Optional[str] = None):
-    """Retrieves all support tickets from the system."""
-    query = {}
-    if customer_id:
-        if not ObjectId.is_valid(customer_id):
-            raise HTTPException(status_code=400, detail="Invalid customer ID format")
-        query["customer_id"] = customer_id
-    if status:
-        query["status"] = status
-
-        tickets = []
-        async for ticket in support_tickets_collection.find(query):
-            tickets.append(SupportTicket(**ticket))
-    return tickets
-
-@api_router.get("/tickets/{ticket_id}", response_model=SupportTicket, summary="Retrieve a support ticket by ID")
-async def get_support_ticket(ticket_id: str):
-    """Retrieves a specific support ticket from the system."""
-    if not ObjectId.is_valid(ticket_id):
-        raise HTTPException(status_code=400, detail="Invalid ticket ID format")
-
-    ticket = await support_tickets_collection.find_one({"_id": ObjectId(ticket_id)})
-    if ticket:
-        return SupportTicket(**ticket)
-    raise HTTPException(status_code=404, detail="Support ticket not found")
-
-@api_router.put("/tickets/{ticket_id}", response_model=SupportTicket, summary="Update a support ticket")
-async def update_support_ticket(ticket_id: str, ticket: SupportTicket):
-    """Updates an existing support ticket by id."""
-    if not ObjectId.is_valid(ticket_id):
-        raise HTTPException(status_code=400, detail="Invalid ticket ID format")
-    
-    update_data = ticket.dict(exclude_unset=True, by_alias=True)
-    update_data.pop("id", None)  # Remove id from update data
-    update_data["updated_at"] = datetime.now().isoformat()  # Update timestamp
-    
-    # Re-analyze sentiment if description is updated
 
     if "description" in update_data:
         sentimental_result = sentiment_pipeline(update_data["description"])[0]
@@ -794,6 +445,113 @@ async def root():
     """Root endpoint to check if the API is running."""
     return {"message": "Welcome to the CRM Support API! Use /api/docs for documentation."}    
 
+# FastAPI endpoints - Customer 
+
+@api_router.post("/customers/", response_model=Customer, summary="Create a new customer")
+async def create_customer(customer: Customer):
+    """Create a new customer in the database."""
+    customer_data = customer.model_dump()
+    result = await customer_collection.insert_one(customer_data)
+    new_customer = await customer_collection.find_one({"_id": result.inserted_id})
+    return Customer(**new_customer)
+
+@api_router.get("/customers/", response_model=List[Customer], summary="Get all customers")
+async def get_customers():
+    """Retrieve all customers from the database."""
+    customers = []
+    async for customer in customer_collection.find():
+        customers.append(Customer(**customer))
+    return customers
+
+@api_router.get("/customers/{customer_id}", response_model=Customer, summary="Get a customer by ID")
+async def get_customer(customer_id: str):
+    """Retrieve a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer = await customer_collection.find_one({"_id": ObjectId(customer_id)})
+    if customer:
+       return Customer(**customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.put("/customers/{customer_id}", response_model=Customer, summary="Update a customer by ID")
+async def update_customer(customer_id: str, customer: Customer):
+    """Update a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    updated_data = customer.model_dump(exclude_unset=True, by_alias=True)
+    if not updated_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+    updated_result = await customer_collection.update_one({"_id": ObjectId(customer_id)}, {"$set": updated_data})
+    if updated_result.modified_count == 1:
+        updated_customer = await customer_collection.find_one({"_id": ObjectId(customer_id)})
+        return Customer(**updated_customer)
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.delete("/customers/{customer_id}", summary="Delete a customer by ID")
+async def delete_customer(customer_id: str):
+    """Delete a customer by their ID."""
+    if not ObjectId.is_valid(customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    delete_result = await customer_collection.delete_one({"_id": ObjectId(customer_id)})
+    if delete_result.deleted_count == 1:
+        await interaction_collection.delete_many({"customer_id": customer_id})
+        return {"message": "Customer and interactions deleted"}
+    raise HTTPException(status_code=404, detail="Customer not found")
+
+# FastAPI endpoints - Interactions
+
+@api_router.post("/interactions/", response_model=Interaction, summary="Create a new interaction")
+async def create_interaction(interaction: Interaction):
+    """Create a new interaction in the database."""
+    if not ObjectId.is_valid(interaction.customer_id):
+        raise HTTPException(status_code=400, detail="Invalid customer ID format")
+    customer_exists = await customer_collection.find_one({"_id": ObjectId(interaction.customer_id)})
+    if not customer_exists:
+        raise HTTPException(status_code=404, detail="Customer not found")
+
+@api_router.get("/interactions/{interaction_id}", response_model=Interaction, summary="Retrieve an interaction by ID")
+async def get_interaction(interaction_id: str):
+    """Retrieve an interaction by its ID."""
+    interaction = get_interaction(interaction_id)
+    if not interaction:
+        raise HTTPException(status_code=404, detail="Interaction not found")
+    """Perform sentiment analysis on both customer message and evolance response"""
+    sentiment_result = sentiment_pipeline(interaction.customer_message)[0]
+    interaction["sentiment"] = sentiment_result['label']
+    interaction["sentiment_score"] = sentiment_result['score']
+    interaction_data = interaction.model_dump(by_alias=True, exclude_none=True)
+    result = await interaction_collection.insert_one(interaction_data)
+    new_interaction = await interaction_collection.find_one({"_id": result.inserted_id})
+    return Interaction(**new_interaction)
+
+@api_router.put("/interactions/{interaction_id}", response_model=Interaction, summary="Update an interaction by ID")
+async def update_interaction(interaction_id: str, interaction: Interaction):
+    """Update an interaction by its ID."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    update_data = interaction.model_dump(exclude_unset=True, by_alias=True)
+    update_data.pop("_id", None)  # Remove id from update data
+    update_data.pop("sentiment", None)  # Remove Sentiment from update data
+    update_data.pop("sentiment_score", None)  # Remove Sentiment score from update data
+
+    if not update_data:
+        raise HTTPException(status_code=400, detail="No fields provided for update")
+
+    updated_result = await interaction_collection.update_one({"_id": ObjectId(interaction_id)}, {"$set": update_data})
+    if updated_result.modified_count == 1:
+        updated_interaction = await interaction_collection.find_one({"_id": ObjectId(interaction_id)})
+        return Interaction(**updated_interaction)
+    raise HTTPException(status_code=404, detail="Interaction not found")
+
+@api_router.delete("/interactions/{interaction_id}", summary="Delete an interaction by ID")
+async def delete_interaction(interaction_id: str):
+    """Delete an interaction by its ID."""
+    if not ObjectId.is_valid(interaction_id):
+        raise HTTPException(status_code=400, detail="Invalid interaction ID format")
+    delete_result = await interaction_collection.delete_one({"_id": ObjectId(interaction_id)})
+    if delete_result.deleted_count == 1:
+        return {"message": "Interaction deleted successfully"}
+    raise HTTPException(status_code=404, detail="Interaction not found")
 
 # FastAPI endpoints - Emolytics
 
@@ -958,9 +716,9 @@ def get_password_hash(password: str) -> str:
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.date.today() + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(minutes=15)
+        expire = datetime.date.today() + timedelta(minutes=15)
     to_encode.update({"exp": expire})
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
